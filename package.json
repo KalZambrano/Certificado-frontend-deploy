@@ -9,9 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/onest": "^5.2.8",
+    "@tabler/icons": "^3.33.0",
     "@tailwindcss/vite": "^4.1.7",
     "astro": "^5.7.14",
-    "tailwindcss": "^4.1.7"
+    "autoprefixer": "^10.4.21",
+    "certificado-frontend": "file:",
+    "tailwindcss": "^3.4.17"
   }
 }

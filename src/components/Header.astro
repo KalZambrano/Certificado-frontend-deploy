@@ -1,0 +1,27 @@
+---
+import UserProfile from './UserProfile.astro';
+import '../styles/dashboard.css';
+---
+
+<header class="header" role="banner">
+  <form class="search-form" role="search" aria-label="Buscar en el dashboard">
+    <input
+      type="search"
+      placeholder="Buscar..."
+      aria-label="Buscar"
+      name="search"
+      autocomplete="off"
+    />
+    <button type="submit" aria-label="Buscar">
+      🔍
+    </button>
+  </form>
+
+  <div class="header-right">
+    <button class="notification-btn" aria-label="Notificaciones">
+      🔔<span class="notif-badge" aria-hidden="true">3</span>
+    </button>
+
+    <UserProfile username="Juan Pérez" avatar="/avatar.png" />
+  </div>
+</header>

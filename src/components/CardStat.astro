@@ -1,0 +1,47 @@
+---
+const { title, value, subtitle, icon } = Astro.props;
+---
+
+<style>
+  .card-stat {
+    --font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: var(--font-family);
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #3b82f6; /* Azul Tailwind, ajusta según tu tema */
+  }
+
+  h3 {
+    font-size: 1rem;
+    color: #64748b; /* Slate-500 */
+    margin: 0;
+  }
+
+  .value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1e293b; /* Slate-800 */
+    margin: 0.5rem 0;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    color: #94a3b8; /* Slate-400 */
+    margin: 0;
+  }
+</style>
+
+<div class="card-stat" role="region" aria-label={title}>
+  {icon && <div class="icon">{icon}</div>}
+  <h3>{title}</h3>
+  <p class="value">{value}</p>
+  <p class="subtitle">{subtitle}</p>
+</div>

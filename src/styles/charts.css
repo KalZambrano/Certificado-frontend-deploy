@@ -1,0 +1,96 @@
+/* Contenedor principal */
+.chart-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chart-container:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.chart-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Gráfico SVG */
+.chart-svg {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+}
+
+.chart-line {
+  fill: none;
+  stroke: #4f46e5;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.chart-point {
+  fill: #4f46e5;
+  stroke: white;
+  stroke-width: 2;
+}
+
+.chart-bar {
+  fill: #4f46e5;
+}
+
+.chart-slice-1 { fill: #4f46e5; }
+.chart-slice-2 { fill: #10b981; }
+.chart-slice-3 { fill: #f59e0b; }
+.chart-slice-4 { fill: #ef4444; }
+
+.chart-arc-1 { stroke: #4f46e5; }
+.chart-arc-2 { stroke: #10b981; }
+.chart-arc-3 { stroke: #f59e0b; }
+
+.chart-axis {
+  stroke: #e2e8f0;
+  stroke-width: 1;
+}
+
+/* Leyenda */
+.chart-legend {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.color-dot.primary { background: #4f46e5; }
+.color-dot.secondary { background: #10b981; }
+.color-dot.tertiary { background: #f59e0b; }
+.color-dot.quaternary { background: #ef4444; }
+
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1rem;
+  }
+}
