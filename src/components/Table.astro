@@ -1,141 +1,60 @@
 ---
+import '../styles/dashboard.css';
 
-const { columns, data } = Astro.props;
+const props = Astro.props as {
+  columns: string[];
+  data: {
+    id: string;
+    nombre: string;
+    curso: string;
+    fecha: string;
+    estado: string;
+  }[];
+};
+
+const { columns, data } = props;
 ---
 
-<table class="products-table" role="table">
+<table class="recent-certificates-table">
   <thead>
     <tr>
-      {columns.map(col => (
-        <th scope="col">{col}</th>
+      {columns.map((col: string) => (
+        <th scope="col" class="header-cell">{col}</th>
       ))}
     </tr>
   </thead>
   <tbody>
-    {data.map(row => (
-      <tr>
-        {columns.map(col => (
-          <td data-column={col.toLowerCase()}>{row[col.toLowerCase()]}</td>
-        ))}
+    {data.map((row, index) => (
+      <tr class="data-row">
+        <td class="user-cell">
+          <div class="user-info">
+            <span class="avatar">{row.nombre.charAt(0)}</span>
+            {row.nombre}
+          </div>
+        </td>
+        <td class="course-cell">{row.curso}</td>
+        <td class="date-cell">{row.fecha}</td>
+        <td class="status-cell">
+          <span class={`status-badge ${row.estado.toLowerCase()}`}>
+            {row.estado}
+          </span>
+        </td>
+        <td class="actions-cell">
+          <button class="action-btn" onclick={`viewCertificate('${row.id}')`}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+          <button class="action-btn" onclick={`downloadCertificate('${row.id}')`}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+        </td>
       </tr>
     ))}
   </tbody>
 </table>
-
-<style is:global>
-
-  .products-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: var(--color-surface);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--color-card-shadow);
-    overflow: hidden;
-    margin: var(--spacing-lg) 0;
-  }
-
-  .products-table thead {
-    position: relative;
-  }
-
-  .products-table thead::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--color-border);
-  }
-
-  .products-table th {
-    background: var(--color-surface);
-    color: var(--color-accent);
-    font-weight: 600;
-    padding: var(--spacing-md);
-    text-align: left;
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    position: relative;
-  }
-
-  .products-table th:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 60%;
-    width: 1px;
-    background: var(--color-border);
-  }
-
-  .products-table td {
-    padding: var(--spacing-md);
-    color: var(--color-primary);
-    border-bottom: 1px solid var(--color-border);
-    transition: var(--transition-base);
-  }
-
-  .products-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .products-table tr:hover td {
-    background: var(--color-hover);
-  }
-
-  .products-table td[data-column="cantidad"] {
-    font-weight: 500;
-    position: relative;
-    padding-left: var(--spacing-lg);
-  }
-
-  .products-table td[data-column="cantidad"]::before {
-    content: '';
-    position: absolute;
-    left: var(--spacing-md);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-accent);
-  }
-
-  .products-table td[data-column="ventas"] {
-    font-weight: 600;
-    color: var(--color-success);
-  }
-
-  /* Efecto hover para filas */
-  .products-table tr {
-    transition: var(--transition-base);
-  }
-
-  .products-table tr:hover {
-    transform: translateX(2px);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .products-table {
-      border-radius: var(--border-radius-sm);
-    }
-    
-    .products-table th,
-    .products-table td {
-      padding: var(--spacing-sm) var(--spacing-md);
-    }
-    
-    .products-table td[data-column="cantidad"] {
-      padding-left: var(--spacing-md);
-    }
-    
-    .products-table td[data-column="cantidad"]::before {
-      display: none;
-    }
-  }
-</style>

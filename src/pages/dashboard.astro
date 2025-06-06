@@ -1,0 +1,94 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import CardStat from '../components/CardStat.astro';
+import Table from '../components/Table.astro';
+import Sidebar from "../components/Sidebar.astro";
+import CourseCard from '../components/CourseCard.astro';
+import '../styles/dashboard.css';
+
+const stats = [
+  { title: 'Certificados Emitidos', value: '78%', subtitle: 'Del total de usuarios', icon: '📜' },
+  { title: 'Certificados Válidos', value: '3500', subtitle: 'Verificados y activos', icon: '✅' },
+  { title: 'Pendientes de revisión', value: '24', subtitle: 'En proceso de validación', icon: '⏳' },
+  { title: 'Certificados anulados', value: '7', subtitle: 'Por incidencias', icon: '❌' }
+];
+
+const tableColumns = ['Alumno', 'Curso', 'Fecha de Emisión', 'Estado', 'Acciones'];
+const tableData = [
+  { id: 'cert-001', nombre: 'María González', curso: 'Marketing Digital Avanzado', fecha: '15/06/2024', estado: 'Aprobado'},
+  { id: 'cert-002', nombre: 'Carlos Mendoza', curso: 'Programación Full Stack', fecha: '14/06/2024', estado: 'Pendiente' },
+  { id: 'cert-003', nombre: 'Ana Torres', curso: 'Diseño UX/UI', fecha: '13/06/2024', estado: 'Aprobado'},
+  { id: 'cert-004', nombre: 'Jorge Silva', curso: 'Data Science', fecha: '12/06/2024', estado: 'Rechazado'},
+];
+
+const recommendedCourses = [
+  {
+    title: "AWS Cloud Practitioner",
+    description: "Certificación básica de AWS para profesionales de TI",
+    match: 95,
+    provider: "AWS",
+    duration: "30 horas"
+  },
+  {
+    title: "Spring Boot Avanzado",
+    description: "Desarrollo de aplicaciones empresariales con Spring Boot",
+    match: 95,
+    provider: "UTP",
+    duration: "40 horas"
+  },
+  {
+    title: "React y Next.js",
+    description: "Desarrollo de aplicaciones web modernas con React y Next.js",
+    match: 85,
+    provider: "YouTube",
+    duration: "25 horas"
+  }
+];
+---
+
+<DashboardLayout>
+  <Sidebar slot="sidebar" />
+  <main class="dashboard-main">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="dashboard-subtitle">Bienvenido, Benjamín. Desde esta sección podrás gestionar y generar certificados académicos o laborales de forma rápida, segura y eficiente.</p>
+
+    <section class="stats-grid">
+      {stats.map(stat => (
+        <CardStat title={stat.title} value={stat.value} subtitle={stat.subtitle} icon={stat.icon} />
+      ))}
+    </section>
+
+    <!-- Sección de Cursos Recomendados  -->
+    <section class="recommendations-section">
+      <h2 class="section-title">Cursos y Certificaciones Recomendadas</h2>
+      <p class="section-subtitle">Basado en los usuarios y las tendencias del mercado</p>
+      
+      <div class="courses-grid">
+        {recommendedCourses.map((course, index) => (
+          <CourseCard key={`course-${index}`} course={course} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Sección de Estadísticas de Certificados -->
+    <section class="certificates-section">
+      <h2 class="section-title">Registro de Certificados</h2>
+       <p class="section-subtitle">Últimos certificados generados en el sistema</p>
+      <Table columns={tableColumns} data={tableData} />
+      <div class="certificates-legend">
+        <div class="legend-item">
+          <span class="legend-color aprobado"></span>
+          <span class="legend-label">Certificados Aprobados</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color pendiente"></span>
+          <span class="legend-label">Certificados Pendientes</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color rechazado"></span>
+          <span class="legend-label">Certificados Rechazados</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</DashboardLayout>

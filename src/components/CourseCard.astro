@@ -1,0 +1,36 @@
+---
+interface Course {
+  title: string;
+  description: string;
+  match: number;
+  provider: string;
+  duration: string;
+}
+
+import '../styles/dashboard.css';
+const { course } = Astro.props;
+---
+
+<div class="course-card">
+  <div class="course-header">
+    <h3>{course.title}</h3>
+    <p class="course-description">{course.description}</p>
+  </div>
+  
+  <div class="course-match">
+    <span class="match-badge">{course.match}% de coincidencia</span>
+  </div>
+  
+  <div class="course-details">
+    <div class="detail-item">
+      <span class="detail-label">Proveedor</span>
+      <span class="detail-value">{course.provider}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Duración</span>
+      <span class="detail-value">{course.duration}</span>
+    </div>
+  </div>
+  
+  <button class="view-course-btn">Ver curso</button>
+</div>

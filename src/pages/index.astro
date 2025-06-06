@@ -1,46 +1,11 @@
 ---
-import DashboardLayout from '../layouts/DashboardLayout.astro';
-import CardStat from '../components/CardStat.astro';
-import Table from '../components/Table.astro';
-import ChartPlaceholder from '../components/ChartPlaceholder.astro';
-import Sidebar from "../components/Sidebar.astro";
-import '../styles/dashboard.css';
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
 
-const stats = [
-  { title: 'Certificados Emitidos', value: '420', subtitle: 'Últimos 30 días', icon: '📄' },
-  { title: 'Nuevos Estudiantes', value: '85', subtitle: 'Últimos 30 días', icon: '🎓' },
-  { title: 'Cursos Completados', value: '112', subtitle: 'Actualizado ahora', icon: '✅' },
-  { title: 'Tasa de Aprobación', value: '92%', subtitle: 'Último trimestre', icon: '📈' }
-];
-
-const tableColumns = ['Estudiante', 'Curso', 'Fecha de Emisión', 'Estado', 'Código'];
-const tableData = [
-  { estudiante: 'Ana López', curso: 'Python Básico', fecha: '2025-05-10', estado: 'Emitido', codigo: 'CERT-00123' },
-  { estudiante: 'Carlos Ruiz', curso: 'Excel Avanzado', fecha: '2025-05-12', estado: 'Pendiente', codigo: 'CERT-00124' },
-  { estudiante: 'María Torres', curso: 'UX/UI Design', fecha: '2025-05-15', estado: 'Emitido', codigo: 'CERT-00125' },
-];
-
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<DashboardLayout>
-  <Sidebar slot="sidebar" />
-  
-  <section class="stats-grid" aria-label="Estadísticas generales">
-    {stats.map(stat => (
-      <CardStat title={stat.title} value={stat.value} subtitle={stat.subtitle} icon={stat.icon} />
-    ))}
-  </section>
-
-  <section class="charts-section" aria-label="Gráficos del dashboard">
-    <div class="charts-grid">
-      <ChartPlaceholder title="Certificados emitidos por mes" type="line" />
-      <ChartPlaceholder title="Distribución por curso" type="pie" />
-      <ChartPlaceholder title="Tasa de aprobación trimestral" type="bar" />
-    </div>
-  </section>
-
-  <section class="data-section" aria-label="Datos de cursos">
-    <h2>Resumen de certificados por curso</h2>
-    <Table columns={tableColumns} data={tableData} />
-  </section>
-</DashboardLayout>
+<Layout title="Certificado - Login" >
+	<Welcome />
+</Layout>
