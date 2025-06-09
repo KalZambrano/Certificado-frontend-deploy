@@ -5,7 +5,6 @@ interface MenuItem {
   name: string;
   href: string;
   icon: keyof typeof icons;
-  active: boolean;
 }
 
 const icons = {
@@ -18,13 +17,18 @@ const icons = {
 };
 
 const menuItems: MenuItem[] = [
-  { name: 'Inicio', href: '#', icon: 'home', active: true },
-  { name: 'Gestión del Certificado', href: '#', icon: 'building', active: false },
-  { name: 'Usuario', href: '#', icon: 'users', active: false },
-  { name: 'Estadísticas', href: '#', icon: 'stats', active: false },
-  { name: 'Documentación', href: '#', icon: 'file-text', active: false },
-  { name: 'Configuración', href: '#', icon: 'settings', active: false }
+  { name: 'Inicio', href: '#', icon: 'home' },
+  { name: 'Gestión del Certificado', href: '#', icon: 'building' },
+  { name: 'Usuario', href: '/users', icon: 'users' },
+  { name: 'Estadísticas', href: '#', icon: 'stats' },
+  { name: 'Documentación', href: '#', icon: 'file-text' },
+  { name: 'Configuración', href: '#', icon: 'settings' }
 ];
+
+export interface Props {
+  activeSection?: string;
+}
+const { activeSection } = Astro.props;
 ---
 
 <aside class="sidebar" role="navigation" aria-label="Menú principal">
@@ -33,14 +37,25 @@ const menuItems: MenuItem[] = [
   </div>
   <div class="sidebar-section-title">MI PANEL</div>
   <ul class="sidebar-menu">
-    {menuItems.map(item => (
-      <li>
-        <a href={item.href} class={item.active ? 'active' : ''} aria-current={item.active ? 'page' : undefined}>
-          <span class="icon" set:html={icons[item.icon]}></span>
-          <span class="menu-text">{item.name}</span>
-        </a>
-      </li>
-    ))}
+    {menuItems.map(item => {
+      const currentSection = activeSection?.toLowerCase().replace(/[^a-z]/g, '');
+      const itemSection = item.name.toLowerCase().replace(/[^a-z]/g, '');
+      const itemHrefSection = item.href.split('/')[1]?.toLowerCase();
+      const isActive = currentSection === itemSection || currentSection === itemHrefSection;
+
+      return (
+        <li>
+          <a 
+            href={item.href} 
+            class={isActive ? 'active' : ''} 
+            aria-current={isActive ? 'page' : undefined}
+          >
+            <span class="icon" set:html={icons[item.icon]}></span>
+            <span class="menu-text">{item.name}</span>
+          </a>
+        </li>
+      );
+    })}
   </ul>
   <div class="sidebar-footer">
     <div class="user-info">
@@ -50,3 +65,14 @@ const menuItems: MenuItem[] = [
     <button class="logout-btn">Cerrar sesión</button>
   </div>  
 </aside>
+
+<style>
+  .sidebar-menu a.active {
+    background-color: #f0f7ff !important;
+    color: #1a73e8 !important;
+    border-left: 3px solid #637a98 !important;
+  }
+  .sidebar-menu a.active .icon {
+    color: #1a73e8 !important;
+  }
+</style>
