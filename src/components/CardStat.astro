@@ -1,0 +1,18 @@
+---
+import '../styles/dashboard.css';
+const { title, value, subtitle, icon } = Astro.props;
+---
+
+<div class="card-stat">
+  <div class="card-stat-header">
+    <div>
+      <h3>{title}</h3>
+      <div class="value">{value}</div>
+      <div class="subtitle">{subtitle}</div>
+    </div>
+    <div class="icon">{icon}</div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress" style={`width: ${parseInt(value)}%;`}></div>
+  </div>
+</div>
