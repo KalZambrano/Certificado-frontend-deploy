@@ -47,7 +47,7 @@ const recommendedCourses = [
 ---
 
 <DashboardLayout>
-  <Sidebar slot="sidebar" />
+  <Sidebar slot="sidebar" activeSection="/dashboard" />
   <main class="dashboard-main">
     <h1 class="dashboard-title">Dashboard</h1>
     <p class="dashboard-subtitle">Bienvenido, Benjamín. Desde esta sección podrás gestionar y generar certificados académicos o laborales de forma rápida, segura y eficiente.</p>
@@ -73,7 +73,7 @@ const recommendedCourses = [
     <!-- Sección de Estadísticas de Certificados -->
     <section class="certificates-section">
       <h2 class="section-title">Registro de Certificados</h2>
-       <p class="section-subtitle">Últimos certificados generados en el sistema</p>
+      <p class="section-subtitle">Últimos certificados generados en el sistema</p>
       <Table columns={tableColumns} data={tableData} />
       <div class="certificates-legend">
         <div class="legend-item">
