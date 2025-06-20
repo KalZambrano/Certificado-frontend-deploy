@@ -3,8 +3,7 @@ import DashboardLayout from '../layouts/DashboardLayout.astro';
 import Sidebar from "../components/Sidebar.astro";
 import '../styles/dashboard.css';
 
-import DeleteIcon from "../assets/trash.svg"
-import EditIcon from "../assets/pencil.svg"
+import { FetchCertificates } from './FetchCertificates';
 
 let certificados = [
   {
@@ -74,49 +73,7 @@ let certificados = [
 
       <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="overflow-x-auto">
-          <table id="tabla-certificados" class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Emisor</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Emisión</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expiración</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Usuario asignado</th>
-
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              {certificados.map((cert) => (
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm font-medium text-gray-900">{cert.nombre}</td>
-                  <td class="px-6 py-4 text-sm text-gray-500">{cert.tipo}</td>
-                  <td class="px-6 py-4 text-sm text-gray-500">{cert.emisor}</td>
-                  <td class="px-6 py-4 text-sm text-gray-500">{cert.fecha_emision}</td>
-                  <td class="px-6 py-4 text-sm text-gray-500">{cert.fecha_expiracion}</td>
-                  <td class="px-6 py-4 text-sm text-gray-500">{cert.usuario}</td>
-                  <td class="px-6 py-4">
-                    <span class={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${cert.estado === 'Vigente' 
-                        ? 'bg-green-100 text-green-800' 
-                        : cert.estado === 'Por renovar' 
-                          ? 'bg-yellow-100 text-yellow-800' 
-                          : 'bg-red-100 text-red-800'}`}>
-                      {cert.estado}
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-sm font-medium">
-                    <button onclick={`editarCertificado('${cert.nombre}')`} class="bg-blue-700 rounded-md p-1"><EditIcon class="text-white size-6 rounded-md"/></button>
-                    <button onclick="eliminarCertificado(this)">
-                      <DeleteIcon class="text-red-600 size-6"/>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <FetchCertificates client:load />
         </div>
       </div>
 
@@ -218,10 +175,13 @@ let certificados = [
       alert("Función de editar aún no implementada para: " + nombre);
     }
   </script>
+  
   <script type="module" is:inline>
     import { setupPostForm } from "/src/lib/apiPost.js";
+    import { config } from "../../config";
+
     setupPostForm({
-      endpoint: '/certificados',
+      endpoint: config.endpoints.certificates.create,
       formName: 'newCert',
       getData: () => {
         const nombreEstudiante = document.getElementById('estudiante')?.value || '';
