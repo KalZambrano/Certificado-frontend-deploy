@@ -13,6 +13,8 @@ export const config = {
             create: '/certificados',
             link: (verificationCode: number | string) => `/certificados/${verificationCode}`,
             detail: (id: number | string) => `/certificados/${id}`,
+            delete: (id: number | string) => `/certificados/${id}`,
+            update: (id: number | string) => `/certificados/${id}`,
         }
     }
 }
