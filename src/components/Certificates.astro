@@ -4,39 +4,6 @@ import Sidebar from "../components/Sidebar.astro";
 import '../styles/dashboard.css';
 
 import { FetchCertificates } from './FetchCertificates';
-
-let certificados = [
-  {
-    id: 1,
-    nombre: "Certificado SSL Wildcard",
-    tipo: "SSL/TLS",
-    emisor: "Let's Encrypt",
-    fecha_emision: "2023-05-15",
-    fecha_expiracion: "2024-05-15",
-    estado: "Vigente",
-    usuario: "Juan Pérez"
-  },
-  {
-    id: 2,
-    nombre: "Certificado Firma Digital",
-    tipo: "FNMT",
-    emisor: "AC FNMT-RCM",
-    fecha_emision: "2023-01-10",
-    fecha_expiracion: "2024-01-10",
-    estado: "Vigente",
-    usuario: "María López"
-  },
-  {
-    id: 3,
-    nombre: "Certificado Code Signing",
-    tipo: "Software",
-    emisor: "DigiCert",
-    fecha_emision: "2022-11-20",
-    fecha_expiracion: "2023-11-20",
-    estado: "Por renovar",
-    usuario: "Carlos Ramírez"
-  }
-];
 ---
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/certificates" />
@@ -80,7 +47,7 @@ let certificados = [
       <!-- Paginación -->
       <div class="flex justify-between items-center mt-4">
         <div class="text-sm text-gray-500">
-          Mostrando 1 al {certificados.length} de {certificados.length} certificados
+          Mostrando 1 al 5 de 5 certificados
         </div>
         <div class="flex space-x-2">
           <button class="px-3 py-1 border rounded-md text-gray-700 bg-white hover:bg-gray-50">Anterior</button>
@@ -162,17 +129,6 @@ let certificados = [
         const texto = fila.innerText.toLowerCase();
         fila.style.display = texto.includes(input) ? "" : "none";
       });
-    }
-
-    function eliminarCertificado(boton) {
-      const fila = boton.closest("tr");
-      if (confirm("¿Seguro que quieres eliminar este certificado?")) {
-        fila.remove();
-      }
-    }
-
-    function editarCertificado(nombre) {
-      alert("Función de editar aún no implementada para: " + nombre);
     }
   </script>
   

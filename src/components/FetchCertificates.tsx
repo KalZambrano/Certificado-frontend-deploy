@@ -1,7 +1,9 @@
 import { SkeletonRow } from "./skeletons/SkeletonRow";
 import { useState, useEffect } from "react";
 import { config, getApiUrl } from "../../config";
-import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { BiSolidPencil } from "react-icons/bi";
+import { editar, eliminar } from "../lib/actionFunctions";
 
 export function FetchCertificates() {
     
@@ -19,10 +21,6 @@ export function FetchCertificates() {
 
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<CertificateAPI[]>([])
-
-    function editarCertificado(nombre: string) {
-      alert("Función de editar aún no implementada para: " + nombre);
-    }
 
     useEffect(() => {
         fetch(getApiUrl(config.endpoints.certificates.list))
@@ -61,10 +59,10 @@ export function FetchCertificates() {
             {
                 loading ? (
                     <>
-                        <SkeletonRow />
-                        <SkeletonRow />
-                        <SkeletonRow />
-                        <SkeletonRow />
+                        <SkeletonRow rowCount={4}/>
+                        <SkeletonRow rowCount={4}/>
+                        <SkeletonRow rowCount={4}/>
+                        <SkeletonRow rowCount={4}/>
                     </>
                 ):(
                     data.map((cert, index) => (
@@ -86,10 +84,10 @@ export function FetchCertificates() {
                                 </span>
                             </td> */}
                             <td className="px-6 py-4 text-sm font-medium flex gap-x-2">
-                                <button onClick={() => editarCertificado(`${cert.curso}`)} className="bg-blue-700 rounded-md p-1 cursor-pointer">
-                                    <FaPencilAlt className="text-white size-6 rounded-md"/>
+                                <button onClick={() => editar(`${cert.curso}`)} className="bg-blue-700 rounded-md p-1 cursor-pointer">
+                                    <BiSolidPencil className="text-white size-6 rounded-md"/>
                                 </button>
-                                <button className="cursor-pointer">
+                                <button onClick={() => eliminar(`${cert.curso}`)} className="cursor-pointer">
                                     <FaRegTrashAlt className="text-red-600 size-6"/>
                                 </button>
                             </td>

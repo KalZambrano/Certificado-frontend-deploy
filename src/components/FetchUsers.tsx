@@ -1,6 +1,7 @@
 import { config, getApiUrl } from "../../config";
 import { useState, useEffect } from "react";
-import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { BiSolidPencil } from "react-icons/bi";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { SkeletonRow } from "./skeletons/SkeletonRow";
 
 export function FetchUsers(){
@@ -77,7 +78,7 @@ export function FetchUsers(){
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-x-2 items-center">
                                 <button className="bg-blue-700 rounded-md p-1 cursor-pointer">
-                                    <FaPencilAlt className="text-white size-6 rounded-md"/>
+                                    <BiSolidPencil className="text-white size-6 rounded-md"/>
                                 </button>
                                 <button className="cursor-pointer">
                                     <FaRegTrashAlt className="text-red-600 size-6"/>

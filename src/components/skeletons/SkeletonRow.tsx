@@ -1,4 +1,4 @@
-export function SkeletonRow() {
+export function SkeletonRow({rowCount = 1}: {rowCount?: number}) {
     return (
         <tr className="animate-pulse">
             <td className="px-6 py-4 whitespace-nowrap">
@@ -13,9 +13,11 @@ export function SkeletonRow() {
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="h-4 bg-gray-300 rounded w-40"></div>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-                <div className="h-4 bg-gray-300 rounded w-20"></div>
-            </td>
+            {[...Array(rowCount)].map((_, index) => (
+                <td key={index} className="px-6 py-4 whitespace-nowrap">
+                    <div className="h-4 bg-gray-300 rounded w-20"></div>
+                </td>
+            ))}
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="h-6 bg-gray-300 rounded w-16"></div>
             </td>
