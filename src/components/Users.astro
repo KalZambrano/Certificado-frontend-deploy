@@ -5,23 +5,7 @@ import Sidebar from "../components/Sidebar.astro";
 import DeleteIcon from "../assets/trash.svg"
 import EditIcon from "../assets/pencil.svg"
 import '../styles/dashboard.css';
-
-import { config } from '../../config';
-
-const users = [
-  {
-    id: 1,
-    name: "María González",
-    email: "maria.g@example.com",
-    role: "Administrador",
-  },
-  {
-    id: 2,
-    name: "Carlos Mendoza",
-    email: "carlos.m@example.com",
-    role: "Usuario",
-  },
-];
+import { FetchUsers } from './FetchUsers';
 
 const userStats = [
   { title: 'Usuarios Totales', value: '142', subtitle: 'Registrados en el sistema', icon: '👥' },
@@ -73,43 +57,7 @@ const userStats = [
       
       <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              {users.map((user) => (
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
-                        {user.name.charAt(0)}
-                      </div>
-                      <div class="ml-4">
-                        <div class="text-sm font-medium text-gray-900">{user.name}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span class={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${user.role === 'Administrador' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'}`}>
-                      {user.role}
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-x-2 items-center">
-                    <button class="bg-blue-700 rounded-md p-1"><EditIcon class="text-white size-6 rounded-md"/></button>
-                    <button><DeleteIcon class="text-red-600 size-6"/></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <FetchUsers client:visible />
         </div>
       </div>
       
@@ -210,6 +158,7 @@ const userStats = [
 
   <script type="module" is:inline>  
   import { setupPostForm } from "/src/lib/apiPost.js";
+  import { config } from '../../config';
 
     setupPostForm({
       endpoint: config.endpoints.users.register,
