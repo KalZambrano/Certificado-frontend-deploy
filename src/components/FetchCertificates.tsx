@@ -22,7 +22,8 @@ export function FetchCertificates() {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<CertificateAPI[]>([])
 
-    useEffect(() => {
+    const fetchCertificates = () => {
+        setLoading(true)
         fetch(getApiUrl(config.endpoints.certificates.list))
             .then(response => {
                 if (!response.ok) {
@@ -39,6 +40,17 @@ export function FetchCertificates() {
                 console.error("Error fetching users:", error);
                 setLoading(false);
             });
+    }
+
+    useEffect(() => {
+        fetchCertificates()
+
+        const handleCertCreated = () => fetchCertificates();
+        window.addEventListener('certificadoCreado', handleCertCreated)
+        
+        return () => {
+            window.removeEventListener('certificadoCreado', handleCertCreated);
+        };
     }, []);
 
     return(
@@ -66,6 +78,7 @@ export function FetchCertificates() {
                     </>
                 ):(
                     data.map((cert, index) => (
+                        
                         <tr key={index} className="hover:bg-gray-50">
                             <td className="px-6 py-4 text-sm font-medium text-gray-900">{cert.curso}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{cert.nombreEstudiante}</td>
@@ -87,7 +100,9 @@ export function FetchCertificates() {
                                 <button onClick={() => editar(`${cert.curso}`)} className="bg-blue-700 rounded-md p-1 cursor-pointer">
                                     <BiSolidPencil className="text-white size-6 rounded-md"/>
                                 </button>
-                                <button onClick={() => eliminar(`${cert.curso}`)} className="cursor-pointer">
+                                <button 
+                                onClick={() => eliminar(`${cert.curso}`,getApiUrl(config.endpoints.certificates.delete(cert.id)), fetchCertificates)}
+                                className="cursor-pointer">
                                     <FaRegTrashAlt className="text-red-600 size-6"/>
                                 </button>
                             </td>
