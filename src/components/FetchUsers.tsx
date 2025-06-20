@@ -17,7 +17,7 @@ export function FetchUsers(){
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<UserAPI[]>([])
 
-    useEffect(() => {
+    const fetchUsers = () => {
         fetch(getApiUrl(config.endpoints.users.list))
             .then(response => {
                 if (!response.ok) {
@@ -34,6 +34,17 @@ export function FetchUsers(){
                 console.error("Error fetching users:", error);
                 setLoading(false);
             });
+    }
+
+    useEffect(() => {
+        fetchUsers()
+
+        const handleCertCreated = () => fetchUsers();
+        window.addEventListener('userCreated', handleCertCreated)
+        
+        return () => {
+            window.removeEventListener('userCreated', handleCertCreated);
+        };
     }, []);
 
     return(
