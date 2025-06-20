@@ -11,7 +11,7 @@ export const config = {
         certificates: {
             list: '/certificados',
             create: '/certificados',
-            link: (verificationCode: number | string) => `/certificados/${verificationCode}`,
+            link: (verificationCode: number | string) => `/certificados/codigo/${verificationCode}`,
             detail: (id: number | string) => `/certificados/${id}`,
             delete: (id: number | string) => `/certificados/${id}`,
             update: (id: number | string) => `/certificados/${id}`,

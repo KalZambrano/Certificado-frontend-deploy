@@ -1,0 +1,33 @@
+---
+import { VerificationPage } from "../../components/VerificationPage";
+import '@fontsource-variable/onest';
+const { title = "Cer + Tech" } = Astro.props
+
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.4.4/qrcode.min.js"></script>
+	</head>
+	<body>
+		<main>
+			<VerificationPage client:load/>
+		</main>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		color-scheme: dark light;
+		font-family: 'Onest Variable', sans-serif;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
