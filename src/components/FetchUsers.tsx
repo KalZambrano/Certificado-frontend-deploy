@@ -1,6 +1,7 @@
 import { config, getApiUrl } from "../../config";
 import { useState, useEffect } from "react";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { SkeletonRow } from "./skeletons/SkeletonRow";
 
 export function FetchUsers(){
     interface UserAPI {
@@ -75,7 +76,7 @@ export function FetchUsers(){
                                 </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-x-2 items-center">
-                                <button className="bg-blue-700 rounded-md p-1">
+                                <button className="bg-blue-700 rounded-md p-1 cursor-pointer">
                                     <FaPencilAlt className="text-white size-6 rounded-md"/>
                                 </button>
                                 <button className="cursor-pointer">
@@ -91,25 +92,3 @@ export function FetchUsers(){
     )
 }
 
-const SkeletonRow = () => (
-    <tr className="animate-pulse">
-        <td className="px-6 py-4 whitespace-nowrap">
-            <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-gray-300"></div>
-                <div className="ml-4">
-                    <div className="h-4 bg-gray-300 rounded w-24 mb-2"></div>
-                    <div className="h-3 bg-gray-200 rounded w-32"></div>
-                </div>
-            </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-            <div className="h-4 bg-gray-300 rounded w-40"></div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-            <div className="h-4 bg-gray-300 rounded w-20"></div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-            <div className="h-6 bg-gray-300 rounded w-16"></div>
-        </td>
-    </tr>
-);
