@@ -1,6 +1,6 @@
 import { getApiUrl } from "../../config";
 
-export function setupPostForm({ endpoint, formName, getData }) {
+export function setupPostForm({ endpoint, formName, getData, eventName }) {
   document.addEventListener('DOMContentLoaded', () => {
     const userForm = document.getElementById(`${formName}Form`);
 
@@ -21,6 +21,8 @@ export function setupPostForm({ endpoint, formName, getData }) {
           if (response.ok) {
             alert('Registrado correctamente');
             userForm.reset();
+
+            window.dispatchEvent(new Event(eventName))
 
             const newUserModal = document.getElementById(`${formName}Modal`);
             if (newUserModal) {
