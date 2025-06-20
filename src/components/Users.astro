@@ -208,10 +208,8 @@ const userStats = [
     });
   </script>
 
-  <script type="module" is:inline>
-
-    import { config } from "../../config";
-import { setupPostForm } from "/src/lib/apiPost.js";
+  <script type="module" is:inline>  
+  import { setupPostForm } from "/src/lib/apiPost.js";
 
     setupPostForm({
       endpoint: config.endpoints.users.register,

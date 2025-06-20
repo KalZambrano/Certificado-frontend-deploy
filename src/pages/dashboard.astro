@@ -52,7 +52,7 @@ const recommendedCourses = [
     <h1 class="dashboard-title">Dashboard</h1>
     <p class="dashboard-subtitle">Bienvenido, Benjamín. Desde esta sección podrás gestionar y generar certificados académicos o laborales de forma rápida, segura y eficiente.</p>
 
-    <section class="stats-grid">
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
       {stats.map(stat => (
         <CardStat title={stat.title} value={stat.value} subtitle={stat.subtitle} icon={stat.icon} />
       ))}
