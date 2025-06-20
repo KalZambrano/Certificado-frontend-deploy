@@ -3,12 +3,16 @@ export const config = {
 
     endpoints: {
         users: {
+            list: '/auth',
             register: '/auth/register',
             login: '/auth/login',
+            detail: (id: number | string) => `/auth/${id}`,
         },
         certificates: {
+            list: '/certificados',
             create: '/certificados',
-            detail: (verificationCode: number | string) => `/certificados/${verificationCode}`,
+            link: (verificationCode: number | string) => `/certificados/${verificationCode}`,
+            detail: (id: number | string) => `/certificados/${id}`,
         }
     }
 }
