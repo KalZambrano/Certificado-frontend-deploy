@@ -21,7 +21,7 @@ const menuItems: MenuItem[] = [
   { name: 'Gestión del Certificado', href: '/certificates', icon: 'building' },
   { name: 'Usuario', href: '/users', icon: 'users' },
   { name: 'Estadísticas', href: '#', icon: 'stats' },
-  { name: 'Documentación', href: '#', icon: 'file-text' },
+  { name: 'Documentación', href: '/documentation', icon: 'file-text' },
   { name: 'Configuración', href: '/configuration', icon: 'settings' }
 ];
 
@@ -38,10 +38,7 @@ const { activeSection } = Astro.props;
   <div class="sidebar-section-title">MI PANEL</div>
   <ul class="sidebar-menu">
     {menuItems.map(item => {
-      const currentSection = activeSection?.toLowerCase().replace(/[^a-z]/g, '');
-      const itemSection = item.name.toLowerCase().replace(/[^a-z]/g, '');
-      const itemHrefSection = item.href.split('/')[1]?.toLowerCase();
-      const isActive = currentSection === itemSection || currentSection === itemHrefSection;
+      const isActive = activeSection === item.href;
 
       return (
         <li>
