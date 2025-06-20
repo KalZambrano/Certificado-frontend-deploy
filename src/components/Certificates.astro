@@ -3,6 +3,9 @@ import DashboardLayout from '../layouts/DashboardLayout.astro';
 import Sidebar from "../components/Sidebar.astro";
 import '../styles/dashboard.css';
 
+import DeleteIcon from "../assets/trash.svg"
+import EditIcon from "../assets/pencil.svg"
+
 let certificados = [
   {
     id: 1,
@@ -105,8 +108,10 @@ let certificados = [
                     </span>
                   </td>
                   <td class="px-6 py-4 text-sm font-medium">
-                    <button onclick="editarCertificado('{cert.nombre}')" class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
-                    <button onclick="eliminarCertificado(this)" class="text-red-600 hover:text-red-900">Eliminar</button>
+                    <button onclick={`editarCertificado('${cert.nombre}')`} class="bg-blue-700 rounded-md p-1"><EditIcon class="text-white size-6 rounded-md"/></button>
+                    <button onclick="eliminarCertificado(this)">
+                      <DeleteIcon class="text-red-600 size-6"/>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -138,8 +143,8 @@ let certificados = [
               &times;
             </button>
           </div>
-          <form>
-            <div class="mb-4">
+          <form id="newCertForm">
+            <!-- <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre del Certificado</label>
               <input class="shadow border rounded w-full py-2 px-3" id="nombre" type="text" placeholder="Ej: Certificado SSL Wildcard">
             </div>
@@ -151,23 +156,30 @@ let certificados = [
                 <option value="Code Signing">Code Signing</option>
                 <option value="Otro">Otro</option>
               </select>
+            </div> -->
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="codigo">Codigo Estudiante</label>
+              <input class="shadow border rounded w-full py-2 px-3" id="codigo" type="text" placeholder="Ej: Let's Encrypt" required>
             </div>
             <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="emisor">Emisor</label>
-              <input class="shadow border rounded w-full py-2 px-3" id="emisor" type="text" placeholder="Ej: Let's Encrypt">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="usuario">Usuario asignado</label>
-              <input class="shadow border rounded w-full py-2 px-3" id="usuario" type="text" placeholder="Ej: Juan Pérez">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="estudiante">Estudiante</label>
+              <input class="shadow border rounded w-full py-2 px-3" id="estudiante" type="text" placeholder="Ej: Juan Pérez" required>
             </div>
             <div class="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="fecha_emision">Fecha de Emisión</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="fecha_emision" type="date">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="fecha">Fecha de Emisión</label>
+                <input class="shadow border rounded w-full py-2 px-3" id="fecha" type="date" required>
               </div>
               <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="fecha_expiracion">Fecha de Expiración</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="fecha_expiracion" type="date">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curso">Curso</label>
+                <input class="shadow border rounded w-full py-2 px-3" id="curso" type="text" required>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nota">Nota</label>
+                <input class="shadow border rounded w-full py-2 px-3" id="nota" type="number" 
+                      step="0.1" min="0" max="20" placeholder="Ej: 15.5" required>
               </div>
             </div>
             <div class="flex justify-end">
@@ -205,5 +217,26 @@ let certificados = [
     function editarCertificado(nombre) {
       alert("Función de editar aún no implementada para: " + nombre);
     }
+  </script>
+  <script type="module" is:inline>
+    import { setupPostForm } from "/src/lib/apiPost.js";
+    setupPostForm({
+      endpoint: '/certificados',
+      formName: 'newCert',
+      getData: () => {
+        const nombreEstudiante = document.getElementById('estudiante')?.value || '';
+        const codigo = document.getElementById('codigo')?.value || '';
+        const curso = document.getElementById('curso')?.value || '';
+        const nota = document.getElementById('nota')?.value || '';
+        const fechaEmision = document.getElementById('fecha')?.value || '';
+
+        if (!nombreEstudiante || !codigo || !curso || !nota || !fechaEmision) {
+          alert("Faltan campos en el formulario");
+          throw new Error("Formulario incompleto");
+        }
+
+        return { nombreEstudiante, codigo, curso, nota, fechaEmision };
+      }
+    });
   </script>
 </DashboardLayout>
