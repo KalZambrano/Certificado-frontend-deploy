@@ -33,7 +33,7 @@ export function FetchCertificates() {
                 return response.json();
             })
             .then(certificates => {
-                console.log(certificates);
+                // console.log(certificates);
                 setData(certificates);
                 setLoading(false);
             })
