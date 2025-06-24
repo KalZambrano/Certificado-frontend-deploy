@@ -1,0 +1,148 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import CardStat from '../components/CardStat.astro';
+import Table from '../components/Table.astro';
+import Sidebar from "../components/SidebarU.astro";
+import CourseCard from '../components/CourseCard.astro';
+import '../styles/dashboard.css';
+
+// Tarjetas estadísticas simuladas
+const stats = [
+  { title: 'Mis Certificados', value: '3', subtitle: 'Total emitidos', icon: '📜' },
+  { title: 'Pendientes', value: '1', subtitle: 'En proceso de revisión', icon: '⏳' },
+  { title: 'Cursos Completados', value: '5', subtitle: 'Finalizados exitosamente', icon: '🎓' },
+  { title: 'Progreso General', value: '70%', subtitle: 'Avance en todos los cursos', icon: '📈' }
+];
+
+
+// Cursos recomendados
+const recommendedCourses = [
+  {
+    title: "AWS Cloud Practitioner",
+    description: "Certificación básica de AWS para profesionales de TI",
+    match: 95,
+    provider: "AWS",
+    duration: "30 horas"
+  },
+  {
+    title: "Spring Boot Avanzado",
+    description: "Desarrollo de aplicaciones empresariales con Spring Boot",
+    match: 95,
+    provider: "UTP",
+    duration: "40 horas"
+  },
+  {
+    title: "React y Next.js",
+    description: "Desarrollo de aplicaciones web modernas con React y Next.js",
+    match: 85,
+    provider: "YouTube",
+    duration: "25 horas"
+  }
+];
+
+// Cursos pendientes
+const pendingCourses = [
+  { title: 'Machine Learning Básico', progreso: 'En progreso', fechaLimite: '30/06/2025' },
+  { title: 'SQL para Analistas', progreso: 'No iniciado', fechaLimite: '15/07/2025' }
+];
+
+// Eventos próximos
+const upcomingEvents = [
+  { evento: 'Webinar: IA en el Trabajo', fecha: '28/06/2025', hora: '18:00' },
+  { evento: 'Sesión en vivo: Bootcamp Python', fecha: '02/07/2025', hora: '17:30' }
+];
+
+// Tabla de certificados
+const tableColumns = ['Alumno', 'Curso', 'Fecha de Emisión', 'Estado', 'Acciones'];
+const tableData = [
+  { id: 'cert-001', nombre: 'Michael López', curso: 'Marketing Digital Avanzado', fecha: '15/06/2024', estado: 'Aprobado' },
+  { id: 'cert-002', nombre: 'Michael López', curso: 'Programación Full Stack', fecha: '14/06/2024', estado: 'Pendiente' },
+  { id: 'cert-003', nombre: 'Michael López', curso: 'Diseño UX/UI', fecha: '13/06/2024', estado: 'Aprobado' }
+];
+---
+
+<DashboardLayout>
+  <Sidebar slot="sidebar" activeSection="/dashboard-usuario" />
+  <main class="dashboard-main">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="dashboard-subtitle">Hola, Michael. Aquí puedes consultar todos los certificados que has obtenido, verificar su estado y continuar con tu proceso de aprendizaje.</p>
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+      {stats.map(stat => (
+        <CardStat title={stat.title} value={stat.value} subtitle={stat.subtitle} icon={stat.icon} />
+      ))}
+    </section>
+
+    <!-- Cursos Recomendados -->
+    <section class="recommendations-section mt-10">
+      <h2 class="section-title">Cursos Recomendados</h2>
+      <p class="section-subtitle">Basado en tus intereses y tendencias del mercado</p>
+      <div class="courses-grid">
+        {recommendedCourses.map((course, index) => (
+          <CourseCard key={`rec-${index}`} course={course} />
+        ))}
+      </div>
+    </section>
+
+   <!-- Cursos Pendientes y Eventos -->
+<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+  <!-- Cursos Pendientes -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
+    <h2 class="section-title mb-2">📚 Cursos Pendientes</h2>
+    <p class="section-subtitle mb-4 text-sm text-gray-500">Cursos que estás cursando o que tienes asignados</p>
+    <ul class="divide-y divide-gray-200">
+      {pendingCourses.map((curso, index) => (
+      <li class="py-3">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-medium text-gray-800">{curso.title}</p>
+              <p class="text-sm text-gray-500">📅 Límite: {curso.fechaLimite}</p>
+            </div>
+            <span class="text-xs bg-yellow-100 text-yellow-800 font-semibold px-2 py-1 rounded-md">
+              {curso.progreso}
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Eventos Próximos -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
+    <h2 class="section-title mb-2">🗓️ Eventos Próximos</h2>
+    <p class="section-subtitle mb-4 text-sm text-gray-500">Actividades agendadas próximamente</p>
+    <ul class="divide-y divide-gray-200">
+      {upcomingEvents.map((event, index) => (
+        <li class="py-3">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-medium text-gray-800">{event.evento}</p>
+              <p class="text-sm text-gray-500">📆 {event.fecha} · 🕒 {event.hora}</p>
+            </div>
+            <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-1 rounded-md">
+              En vivo
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+    <!-- Sección de Certificados -->
+    <section class="certificates-section mt-10">
+      <h2 class="section-title">Mis Certificados</h2>
+      <p class="section-subtitle">Consulta el estado de tus certificados emitidos</p>
+      <Table columns={tableColumns} data={tableData} />
+      <div class="certificates-legend mt-4">
+        <div class="legend-item">
+          <span class="legend-color aprobado"></span>
+          <span class="legend-label">Aprobado</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color pendiente"></span>
+          <span class="legend-label">Pendiente</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</DashboardLayout>
