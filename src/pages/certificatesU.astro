@@ -1,0 +1,184 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import Sidebar from '../components/SidebarU.astro';
+import '../styles/dashboard.css';
+---
+
+<DashboardLayout>
+  <Sidebar slot="sidebar" activeSection="/certificates" />
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Gestión de Certificados</h1>
+        <p class="dashboard-subtitle">
+          Visualiza, verifica y gestiona todos tus certificados académicos
+        </p>
+      </div>
+    </div>
+
+    <div class="filters-section">
+      <div class="search-box">
+        <input type="text" placeholder="Buscar certificado..." />
+        <button>🔍</button>
+      </div>
+      <div class="filter-options">
+        <select>
+          <option>Todas las instituciones</option>
+          <option>Universidad TecnoPlus</option>
+          <option>Academia Digital Master</option>
+          <option>Instituto Profesional CTI</option>
+        </select>
+        <select>
+          <option>Todos los estados</option>
+          <option>Aprobado</option>
+          <option>Pendiente</option>
+          <option>Vencido</option>
+        </select>
+        <button class="btn-filter">Aplicar Filtros</button>
+      </div>
+    </div>
+
+    <!-- Sección de Instituciones -->
+    <section class="institution-section">
+      <h2 class="section-title">
+        <span class="icon">🏛️</span> Certificados por Institución
+      </h2>
+      
+      <!-- Harvard University -->
+      <div class="institution-card">
+        <div class="institution-header">
+          <img src="/images/logos/tecno-plus.png" alt="img" class="institution-logo" />
+          <div>
+            <h3>Harvard University</h3>
+            <p class="institution-meta">7 certificados · Validez internacional</p>
+          </div>
+          <button class="btn-verify">Verificar Autenticidad</button>
+        </div>
+        
+        <table class="institution-table">
+          <thead>
+            <tr>
+              <th>Certificado</th>
+              <th>Código</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Master en Data Science</td>
+              <td class="monospace">TP-DS-2023-8452</td>
+              <td>15/03/2023</td>
+              <td><span class="status-badge approved">Aprobado</span></td>
+              <td>
+                <button class="btn-action">📥 Descargar</button>
+                <button class="btn-action">🔗 Compartir</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Cloud Computing Avanzado</td>
+              <td class="monospace">TP-CC-2023-9267</td>
+              <td>22/08/2023</td>
+              <td><span class="status-badge approved">Aprobado</span></td>
+              <td>
+                <button class="btn-action">📥 Descargar</button>
+                <button class="btn-action">🔗 Compartir</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Blockchain para Negocios</td>
+              <td class="monospace">TP-BC-2024-1543</td>
+              <td>05/02/2024</td>
+              <td><span class="status-badge pending">Pendiente</span></td>
+              <td>
+                <button class="btn-action" disabled>⌛ En revisión</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- University of Michigan -->
+      <div class="institution-card">
+        <div class="institution-header">
+          <img src="/images/logos/digital-master.png" alt="img" class="institution-logo" />
+          <div>
+            <h3>University of Michigan</h3>
+            <p class="institution-meta">5 certificados · Cursos intensivos</p>
+          </div>
+          <button class="btn-verify">Verificar Autenticidad</button>
+        </div>
+        
+        <table class="institution-table">
+          <thead>
+            <tr>
+              <th>Certificado</th>
+              <th>Código</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Marketing Digital Avanzado</td>
+              <td class="monospace">ADM-MD-2022-7354</td>
+              <td>10/06/2022</td>
+              <td><span class="status-badge approved">Aprobado</span></td>
+              <td>
+                <button class="btn-action">📥 Descargar</button>
+                <button class="btn-action">🔗 Compartir</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Diseño UX/UI Profesional</td>
+              <td class="monospace">ADM-UX-2023-3289</td>
+              <td>15/11/2023</td>
+              <td><span class="status-badge approved">Aprobado</span></td>
+              <td>
+                <button class="btn-action">📥 Descargar</button>
+                <button class="btn-action">🔗 Compartir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Verificación de Certificados -->
+    <section class="verification-section">
+      <h2 class="section-title">
+        <span class="icon">🔍</span> Verificación de Autenticidad
+      </h2>
+      <div class="verification-card">
+        <div class="verification-info">
+          <h3>¿Necesitas verificar un certificado?</h3>
+          <p>
+            Ingresa el código único del certificado para validar su autenticidad
+            con nuestras instituciones asociadas.
+          </p>
+        </div>
+        <div class="verification-form">
+          <input 
+            type="text" 
+            placeholder="Ej: TP-DS-2023-8452" 
+            class="verification-input"
+          />
+          <button class="btn-verify">Verificar Certificado</button>
+        </div>
+        <div class="verification-result hidden">
+          <div class="result-icon">✅</div>
+          <div>
+            <h4>Certificado Válido</h4>
+            <p>
+              <strong>Master en Data Science</strong><br />
+              Universidad TecnoPlus · Emitido el 15/03/2023<br />
+              Código: TP-DS-2023-8452
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</DashboardLayout>
