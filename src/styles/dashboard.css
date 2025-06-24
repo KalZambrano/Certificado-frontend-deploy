@@ -736,3 +736,246 @@ body {
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+/* CertificatesU */
+filters-section {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    flex-grow: 1;
+    max-width: 400px;
+  }
+
+  .search-box input {
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    width: 100%;
+    outline: none;
+  }
+
+  .search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+  }
+
+  .filter-options {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-options select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #1e293b;
+  }
+
+  .btn-filter {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  /* Secciones */
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-title .icon {
+    font-size: 1.2em;
+  }
+
+  /* Tarjetas de Institución */
+  .institution-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .institution-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    flex-wrap: wrap;
+  }
+
+  .institution-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .institution-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    flex-grow: 1;
+  }
+
+  .institution-meta {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0.25rem 0 0;
+  }
+
+  .btn-verify {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #4f46e5;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Tablas */
+  .institution-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .institution-table th {
+    background: #f8fafc;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.875rem;
+  }
+
+  .institution-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+
+  .monospace {
+    font-family: monospace;
+    color: #475569;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .status-badge.approved {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+  .status-badge.pending {
+    background: #fffbeb;
+    color: #d97706;
+  }
+
+  .btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4f46e5;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .btn-action:disabled {
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+
+  /* Verificación */
+  .verification-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 2rem;
+  }
+
+  .verification-info h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+  }
+
+  .verification-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .verification-input {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    min-width: 300px;
+  }
+
+  .verification-result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #f0fdf4;
+    border-radius: 8px;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .verification-result.hidden {
+    display: none;
+  }
+
+  .result-icon {
+    font-size: 1.5rem;
+    color: #16a34a;
+  }
+
+  .verification-result h4 {
+    margin: 0 0 0.5rem;
+    color: #16a34a;
+  }
+
+  .verification-result p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
