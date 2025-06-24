@@ -1,6 +1,6 @@
 import { config, getApiUrl } from "../../config";
 import { useEffect, useState, useRef } from "react";
-import { loadExternalScript } from "../lib/localExternalScript";
+import { loadExternalScript } from "@/lib/localExternalScript";
 
 export function VerificationPage() {
     const [certificate, setCertificate] = useState(null);
