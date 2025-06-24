@@ -9,6 +9,7 @@ export function setupPostForm({ endpoint, formName, getData, eventName }) {
         e.preventDefault();
 
         const data = getData();
+        // console.log(data)
         try {
           const response = await fetch(getApiUrl(endpoint), {
             method: 'POST',

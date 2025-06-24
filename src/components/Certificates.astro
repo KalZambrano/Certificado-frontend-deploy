@@ -63,7 +63,7 @@ import { FetchCertificates } from './FetchCertificates';
         <div class="p-6">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-bold text-gray-800">Nuevo Certificado</h3>
-            <button onclick="document.getElementById('newCertModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-500">
+            <button onclick="document.getElementById('newCertModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-500 text-4xl">
               &times;
             </button>
           </div>
@@ -82,12 +82,25 @@ import { FetchCertificates } from './FetchCertificates';
               </select>
             </div> -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="codigo">Codigo Estudiante</label>
-              <input class="shadow border rounded w-full py-2 px-3" id="codigo" type="text" placeholder="Ej: Let's Encrypt" required>
-            </div>
-            <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="estudiante">Estudiante</label>
               <input class="shadow border rounded w-full py-2 px-3" id="estudiante" type="text" placeholder="Ej: Juan Pérez" required>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción</label>
+              <textarea class="shadow border rounded w-full py-2 px-3" rows="4" id="description" placeholder="Ej: Certificado otorgado por haber completado con exito todos los modulos" required></textarea>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">Etiquetas</label>
+              <div class="flex flex-col gap-2">
+                <input
+                    type="text"
+                    name="tags"
+                    id="tags-input"
+                    placeholder="Escribe un tag y presiona 'Enter' o una coma."
+                    class="shadow border rounded w-full py-2 px-3">
+                <div id="tags-list" class="flex gap-2 flex-wrap"></div>
+              </div>
+              <input type="hidden" name="tags" id="tags">
             </div>
             <div class="grid grid-cols-2 gap-4 mb-4">
               <div>
@@ -131,6 +144,11 @@ import { FetchCertificates } from './FetchCertificates';
       });
     }
   </script>
+
+  <script type="module" is:inline>
+    import { showTags } from '/src/lib/tagsFunctions.js'
+    showTags('tags-list', 'tags-input', 'tags')
+  </script>
   
   <script type="module" is:inline>
     import { setupPostForm } from "/src/lib/apiPost.js";
@@ -141,17 +159,25 @@ import { FetchCertificates } from './FetchCertificates';
       formName: 'newCert',
       getData: () => {
         const nombreEstudiante = document.getElementById('estudiante')?.value || '';
-        const codigo = document.getElementById('codigo')?.value || '';
+        const descripcion = document.getElementById('description')?.value || '';
         const curso = document.getElementById('curso')?.value || '';
         const nota = document.getElementById('nota')?.value || '';
         const fechaEmision = document.getElementById('fecha')?.value || '';
 
-        if (!nombreEstudiante || !codigo || !curso || !nota || !fechaEmision) {
+        const hiddenTagsInput = document.getElementById('tags');
+        const rawValue = hiddenTagsInput.value;
+
+        const habilidades = rawValue
+          .split(',')
+          .map(tag => tag.trim().toUpperCase())
+          .filter(tag => tag.length > 0);
+
+        if (!nombreEstudiante || !descripcion || !curso || !nota || !fechaEmision || habilidades.length === 0) {
           alert("Faltan campos en el formulario");
           throw new Error("Formulario incompleto");
         }
 
-        return { nombreEstudiante, codigo, curso, nota, fechaEmision };
+        return { nombreEstudiante, descripcion, curso, nota, fechaEmision, habilidades };
       },
       eventName: 'certificadoCreado'
     });
