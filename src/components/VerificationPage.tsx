@@ -1,5 +1,6 @@
 import { config, getApiUrl } from "../../config";
 import { useEffect, useState, useRef } from "react";
+import { loadExternalScript } from "../lib/localExternalScript";
 
 export function VerificationPage() {
     const [certificate, setCertificate] = useState(null);
@@ -26,24 +27,19 @@ export function VerificationPage() {
     },[])
 
     useEffect(() => {
-    if (certificate && canvasRef.current && typeof window !== 'undefined') {
-        // @ts-ignore: QRCode viene de script global
-        const QRCode = window.QRCode;
-        if (QRCode) {
-            QRCode.toCanvas(canvasRef.current, window.location.href, {
+        if (certificate && canvasRef.current) {
+            loadExternalScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.4.4/qrcode.min.js", "QRCode")
+            .then((QRCode: any) => {
+                QRCode.toCanvas(canvasRef.current, window.location.href, {
                 width: 200,
-                color: {
-                    dark: "#000000",
-                    light: "#ffffff"
-                }
-            }, (error: any) => {
+                color: { dark: "#000000", light: "#ffffff" }
+                }, (error: any) => {
                 if (error) console.error("Error generando QR:", error);
-            });
-        } else {
-            console.error("QRCode no está definido");
+                });
+            })
+            .catch((err) => console.error("Error cargando QRCode:", err));
         }
-    }
-}, [certificate]);
+    }, [certificate]);
 
 
     if (loading) { return <p className="grid min-h-screen place-content-center text-5xl font-extrabold animate-pulse bg-blue-200 text-black">Cargando...</p> }
