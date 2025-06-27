@@ -3,9 +3,16 @@ import { useState, useEffect } from "react";
 import { BiSolidPencil } from "react-icons/bi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { SkeletonRow } from "./skeletons/SkeletonRow";
-import { type UserAPI } from "types";
 
 export function FetchUsers(){
+    interface UserAPI {
+        id:       number;
+        nombre:   string;
+        apellido: string;
+        correo:   string;
+        clave:    string;
+        rol:      string;
+    }
 
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<UserAPI[]>([])
