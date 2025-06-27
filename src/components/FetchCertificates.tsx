@@ -9,13 +9,21 @@ export function FetchCertificates() {
 
     interface CertificateAPI {
         id:                 number;
-        nombreEstudiante:   string;
         curso:              string;
         nota:               number;
         fechaEmision:       Date;
         codigoVerificacion: string;
         habilidades:        string[];
         descripcion:        string;
+        estudiante:         Estudiante;
+    }
+    interface Estudiante {
+        id:       number;
+        nombre:   string;
+        apellido: string;
+        correo:   string;
+        clave:    string;
+        rol:      string;
     }
 
     const [loading, setLoading] = useState(true);
@@ -77,10 +85,9 @@ export function FetchCertificates() {
                     </>
                 ):(
                     data.map((cert, index) => (
-                        
                         <tr key={index} className="hover:bg-gray-50">
                             <td className="px-6 py-4 text-sm font-medium text-gray-900">{cert.curso}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{cert.nombreEstudiante}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{cert.estudiante.apellido}, {cert.estudiante.nombre}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{new Date(cert.fechaEmision).toLocaleDateString()}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">Vencera Algun dia</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{cert.nota}</td>
