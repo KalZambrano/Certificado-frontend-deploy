@@ -1,18 +1,9 @@
 import { config, getApiUrl } from "../../config";
 import { useEffect, useState, useRef } from "react";
 import { loadExternalScript } from "@/lib/localExternalScript";
+import { type CertificateAPI } from "../../types";
 
 export function VerificationPage() {
-    interface CertificateAPI {
-        id:                 number;
-        nombreEstudiante:   string;
-        curso:              string;
-        nota:               number;
-        fechaEmision:       Date;
-        codigoVerificacion: string;
-        habilidades:        string[];
-        descripcion:        string;
-    }
 
     const [certificate, setCertificate] = useState<CertificateAPI | null>(null);
     const [loading, setLoading] = useState(true)

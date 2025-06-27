@@ -4,30 +4,13 @@ import { config, getApiUrl } from "../../config";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BiSolidPencil } from "react-icons/bi";
 import { editar, eliminar } from "../lib/actionFunctions";
+import { type CertificateUniqueAPI } from "types";
 
 export function FetchCertificates() {
 
-    interface CertificateAPI {
-        id:                 number;
-        curso:              string;
-        nota:               number;
-        fechaEmision:       Date;
-        codigoVerificacion: string;
-        habilidades:        string[];
-        descripcion:        string;
-        estudiante:         Estudiante;
-    }
-    interface Estudiante {
-        id:       number;
-        nombre:   string;
-        apellido: string;
-        correo:   string;
-        clave:    string;
-        rol:      string;
-    }
 
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<CertificateAPI[]>([])
+    const [data, setData] = useState<CertificateUniqueAPI[]>([])
 
     const fetchCertificates = () => {
         setLoading(true)
