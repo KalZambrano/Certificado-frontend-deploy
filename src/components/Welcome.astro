@@ -32,3 +32,51 @@
         mask-image: linear-gradient(to bottom, black 80%, transparent);
     }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+
+    if (!form){
+		console.error('Form not founr')
+		return;
+	}
+	
+	form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Obtener valores del formulario
+      const correo = form.usuario.value;
+      const clave = form.password.value;
+
+      try {
+        const response = await fetch('http://localhost:8080/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+		    credentials: 'include',
+          body: JSON.stringify({
+            correo: correo,
+            clave: clave
+          })
+        });
+
+        const data = await response;
+        console.log(data); // Muestra la respuesta en la consola
+
+        if (response.ok) {
+          // Por ejemplo: redireccionar o mostrar un mensaje
+          alert('Inicio de sesión exitoso');
+          window.location.href = "/dashboard";
+        } else {
+			// Manejar errores en la parte del backend
+          alert('Error al iniciar sesión:');
+        }
+      } catch (error) {
+        console.error('Error al hacer login:', error);
+        alert('Hubo un problema de conexión con el servidor.');
+      }
+    });
+  });
+</script>
