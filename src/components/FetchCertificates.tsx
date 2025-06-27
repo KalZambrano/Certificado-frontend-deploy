@@ -4,20 +4,9 @@ import { config, getApiUrl } from "../../config";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BiSolidPencil } from "react-icons/bi";
 import { editar, eliminar } from "../lib/actionFunctions";
+import { type CertificateAPI } from "types";
 
 export function FetchCertificates() {
-    
-    interface CertificateAPI {
-        id:                 number;
-        nombreEstudiante:   string;
-        codigo:             string;
-        curso:              string;
-        nota:               number;
-        fechaEmision:       Date;
-        codigoVerificacion: string;
-        habilidades:        any[];
-        descripcion:        null;
-    }
 
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<CertificateAPI[]>([])
