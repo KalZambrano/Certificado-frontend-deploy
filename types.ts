@@ -18,6 +18,22 @@ export interface UserAPI {
     rol:      string;
 }
 
+export interface OnlyUsersAPI {
+    id:       number;
+    nombre:   string;
+    apellido: string;
+    correo:   string;
+}
+
+export interface StudentCertificatesAPI {
+    nombreCompleto: string;
+    curso:          string;
+    nota:           number;
+    descripcion:    string;
+    habilidades:    string[];
+    fechaEmision:   Date;
+}
+
 // Para cuando se consigue un unico certificado
 export interface CertificateUniqueAPI {
     id:                 number;
