@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar.astro";
 import '@/styles/dashboard.css';
 
 import { FetchCertificates } from './FetchCertificates';
+import { StudentsOptions } from './StudentsOptions';
 ---
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/certificates" />
@@ -83,7 +84,10 @@ import { FetchCertificates } from './FetchCertificates';
             </div> -->
             <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="estudiante">Estudiante</label>
-              <input class="shadow border rounded w-full py-2 px-3" id="estudiante" type="text" placeholder="Ej: Juan Pérez" required>
+              
+              <select class="shadow border rounded w-full py-2 px-3" name="estudiante" id="estudiante" required>
+                <StudentsOptions client:load />
+              </select>
             </div>
             <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción</label>
@@ -104,19 +108,13 @@ import { FetchCertificates } from './FetchCertificates';
             </div>
             <div class="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="fecha">Fecha de Emisión</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="fecha" type="date" required>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nota">Nota</label>
+                <input class="shadow border rounded w-full py-2 px-3" id="nota" type="number" 
+                      step="0.1" min="0" max="20" placeholder="Ej: 15.5" required>
               </div>
               <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="curso">Curso</label>
                 <input class="shadow border rounded w-full py-2 px-3" id="curso" type="text" required>
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="nota">Nota</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="nota" type="number" 
-                      step="0.1" min="0" max="20" placeholder="Ej: 15.5" required>
               </div>
             </div>
             <div class="flex justify-end">
@@ -158,11 +156,10 @@ import { FetchCertificates } from './FetchCertificates';
       endpoint: config.endpoints.certificates.create,
       formName: 'newCert',
       getData: () => {
-        const nombreEstudiante = document.getElementById('estudiante')?.value || '';
+        const correo = document.getElementById('estudiante')?.value || '';
         const descripcion = document.getElementById('description')?.value || '';
         const curso = document.getElementById('curso')?.value || '';
         const nota = document.getElementById('nota')?.value || '';
-        const fechaEmision = document.getElementById('fecha')?.value || '';
 
         const hiddenTagsInput = document.getElementById('tags');
         const rawValue = hiddenTagsInput.value;
@@ -172,12 +169,12 @@ import { FetchCertificates } from './FetchCertificates';
           .map(tag => tag.trim().toUpperCase())
           .filter(tag => tag.length > 0);
 
-        if (!nombreEstudiante || !descripcion || !curso || !nota || !fechaEmision || habilidades.length === 0) {
+        if (!correo || !descripcion || !curso || !nota || habilidades.length === 0) {
           alert("Faltan campos en el formulario");
           throw new Error("Formulario incompleto");
         }
 
-        return { nombreEstudiante, descripcion, curso, nota, fechaEmision, habilidades };
+        return { correo, descripcion, curso, nota, habilidades };
       },
       eventName: 'certificadoCreado'
     });
