@@ -1,3 +1,4 @@
+// Type para la api de conseguir todos los certificados
 export interface CertificatesAPI {
     id:                 number;
     nombreEstudiante:   string;
@@ -9,6 +10,7 @@ export interface CertificatesAPI {
     descripcion:        string;
 }
 
+// Type para api de conseguir todos los usuarios
 export interface UserAPI {
     id:       number;
     nombre:   string;
@@ -18,6 +20,7 @@ export interface UserAPI {
     rol:      string;
 }
 
+// Type para api que regresa solo los de rol "USER"
 export interface OnlyUsersAPI {
     id:       number;
     nombre:   string;
@@ -25,6 +28,7 @@ export interface OnlyUsersAPI {
     correo:   string;
 }
 
+// Type para los certificados del estudiante (encontrados por email)
 export interface StudentCertificatesAPI {
     nombreCompleto: string;
     curso:          string;
@@ -34,7 +38,7 @@ export interface StudentCertificatesAPI {
     fechaEmision:   Date;
 }
 
-// Para cuando se consigue un unico certificado
+// Para cuando se consigue un unico certificado - Pagina dinamica
 export interface CertificateUniqueAPI {
     id:                 number;
     curso:              string;

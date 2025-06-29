@@ -2,7 +2,6 @@
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
 import Sidebar from '@/components/SidebarU.astro';
 import CardStat from '@/components/CardStat.astro';
-
 import CourseCard from '@/components/CourseCard.astro';
 import '@/styles/dashboard.css';
 import { MyCertificates } from '@/components/usuario/MyCertificates';
@@ -51,14 +50,6 @@ const pendingCourses = [
 const upcomingEvents = [
   { evento: 'Webinar: IA en el Trabajo', fecha: '28/06/2025', hora: '18:00' },
   { evento: 'Sesión en vivo: Bootcamp Python', fecha: '02/07/2025', hora: '17:30' }
-];
-
-// Tabla de certificados
-const tableColumns = ['Alumno', 'Curso', 'Fecha de Emisión', 'Estado', 'Acciones'];
-const tableData = [
-  { id: 'cert-001', nombre: 'Michael López', curso: 'Marketing Digital Avanzado', fecha: '15/06/2024', estado: 'Aprobado' },
-  { id: 'cert-002', nombre: 'Michael López', curso: 'Programación Full Stack', fecha: '14/06/2024', estado: 'Pendiente' },
-  { id: 'cert-003', nombre: 'Michael López', curso: 'Diseño UX/UI', fecha: '13/06/2024', estado: 'Aprobado' }
 ];
 ---
 

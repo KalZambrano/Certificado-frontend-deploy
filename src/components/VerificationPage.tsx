@@ -1,11 +1,11 @@
 import { config, getApiUrl } from "../../config";
 import { useEffect, useState, useRef } from "react";
 import { loadExternalScript } from "@/lib/localExternalScript";
-import { type CertificateAPI } from "../../types";
+import { type CertificatesAPI } from "../../types";
 
 export function VerificationPage() {
 
-    const [certificate, setCertificate] = useState<CertificateAPI | null>(null);
+    const [certificate, setCertificate] = useState<CertificatesAPI | null>(null);
     const [loading, setLoading] = useState(true)
 
     const canvasRef = useRef(null);
