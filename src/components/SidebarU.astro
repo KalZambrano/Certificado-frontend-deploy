@@ -58,7 +58,7 @@ const { activeSection } = Astro.props;
       <img src="https://i.pravatar.cc/100?img=3" alt="Usuario" />
       <span>Michael</span>
     </div>
-    <button class="logout-btn">Cerrar sesión</button>
+    <button class="logout-btn" id="btn-logout">Cerrar sesión</button>
   </div>  
 </aside>
 
@@ -72,3 +72,13 @@ const { activeSection } = Astro.props;
     color: #1a73e8 !important;
   }
 </style>
+
+<script>
+  document.getElementById('btn-logout')?.addEventListener('click', () => {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      localStorage.removeItem('user')
+      localStorage.removeItem('role')
+      window.location.href = '/'
+    }
+  })
+</script>
