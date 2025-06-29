@@ -34,15 +34,16 @@
 </style>
 
 <script>
+
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
 
     if (!form){
-		console.error('Form not founr')
-		return;
-	}
+      console.error('Formulario no encontrado')
+      return;
+    }
 	
-	form.addEventListener('submit', async (e) => {
+	  form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       // Obtener valores del formulario
@@ -55,22 +56,29 @@
           headers: {
             'Content-Type': 'application/json'
           },
-		    credentials: 'include',
+		      credentials: 'include',
           body: JSON.stringify({
             correo: correo,
             clave: clave
           })
         });
 
-        const data = await response;
-        console.log(data); // Muestra la respuesta en la consola
+        const data = await response.json();
+        const role = data.rol
+        const user = data.correo
+         // Muestra la respuesta en la consola
 
         if (response.ok) {
           // Por ejemplo: redireccionar o mostrar un mensaje
+          localStorage.setItem('user', user)
+          localStorage.setItem('role', role)
           alert('Inicio de sesión exitoso');
-          window.location.href = "/dashboard";
+          role === 'ADMINISTRADOR' 
+          ? window.location.href = "/dashboard"
+          : window.location.href = "/user/dashboard";
+          
         } else {
-			// Manejar errores en la parte del backend
+			    // Manejar errores
           alert('Error al iniciar sesión:');
         }
       } catch (error) {

@@ -29,4 +29,14 @@ const { title = "Cer + Tech" } = Astro.props
 		height: 100%;
 	}
 </style>
+<script>
+  if (!localStorage.getItem('role') || !localStorage.getItem('user')) {
+    window.location.href = "/";
+  } else {
+    const role = localStorage.getItem('role');
+    if (role !== 'ADMINISTRADOR') {
+      window.location.href = "/user/dashboard";
+    }
+  }
+</script>
  
