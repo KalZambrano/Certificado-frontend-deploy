@@ -2,9 +2,10 @@
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
 import Sidebar from '@/components/SidebarU.astro';
 import CardStat from '@/components/CardStat.astro';
-import Table from '@/components/Table.astro';
+
 import CourseCard from '@/components/CourseCard.astro';
 import '@/styles/dashboard.css';
+import { MyCertificates } from '@/components/usuario/MyCertificates';
 
 // Tarjetas estadísticas simuladas
 const stats = [
@@ -132,7 +133,7 @@ const tableData = [
     <section class="certificates-section mt-10">
       <h2 class="section-title">Mis Certificados</h2>
       <p class="section-subtitle">Consulta el estado de tus certificados emitidos</p>
-      <Table columns={tableColumns} data={tableData} />
+      <MyCertificates client:visible />
       <div class="certificates-legend mt-4">
         <div class="legend-item">
           <span class="legend-color aprobado"></span>
