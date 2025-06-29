@@ -4,9 +4,12 @@ export const config = {
     endpoints: {
         users: {
             list: '/auth',
+            listUsers: '/auth/user',
+            listAdmins: '/auth/administrador',
             register: '/auth/register',
             login: '/auth/login',
             detail: (id: number | string) => `/auth/${id}`,
+            certificates: (email: string) => `/certificados/estudiante?correo=${email}`
         },
         certificates: {
             list: '/certificados',
