@@ -1,14 +1,16 @@
 ---
 import "../styles/dashboard.css";
 import '@fontsource-variable/onest';
+import ClientRouter from "astro/components/ClientRouter.astro";
 const { title = "Cer + Tech" } = Astro.props
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
+  <ClientRouter/>
 </head>
 <body>
   <div class="dashboard-wrapper">
