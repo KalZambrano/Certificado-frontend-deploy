@@ -47,7 +47,7 @@ export function VerificationPage() {
     if (loading) { return <p className="grid min-h-screen place-content-center text-5xl font-extrabold animate-pulse bg-blue-200 text-black">Cargando...</p> }
 
     if (!certificate) { return <p className="grid min-h-screen place-content-center text-5xl font-extrabold bg-blue-200 text-black">Certificado no encontrado...</p> }
-    console.log(certificate)
+    // console.log(certificate)
 
     const { nombreEstudiante, nota, fechaEmision, curso, habilidades, descripcion } = certificate
 
