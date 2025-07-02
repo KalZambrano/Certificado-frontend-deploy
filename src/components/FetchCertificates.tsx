@@ -4,23 +4,13 @@ import { config, getApiUrl } from "../../config";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BiSolidPencil } from "react-icons/bi";
 import { editar, eliminar } from "../lib/actionFunctions";
+import { type CertificateUniqueAPI } from "types";
 
 export function FetchCertificates() {
-    
-    interface CertificateAPI {
-        id:                 number;
-        nombreEstudiante:   string;
-        codigo:             string;
-        curso:              string;
-        nota:               number;
-        fechaEmision:       Date;
-        codigoVerificacion: string;
-        habilidades:        any[];
-        descripcion:        null;
-    }
+
 
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<CertificateAPI[]>([])
+    const [data, setData] = useState<CertificateUniqueAPI[]>([])
 
     const fetchCertificates = () => {
         setLoading(true)
@@ -78,10 +68,9 @@ export function FetchCertificates() {
                     </>
                 ):(
                     data.map((cert, index) => (
-                        
                         <tr key={index} className="hover:bg-gray-50">
                             <td className="px-6 py-4 text-sm font-medium text-gray-900">{cert.curso}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">{cert.nombreEstudiante}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{cert.estudiante.apellido}, {cert.estudiante.nombre}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{new Date(cert.fechaEmision).toLocaleDateString()}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">Vencera Algun dia</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{cert.nota}</td>

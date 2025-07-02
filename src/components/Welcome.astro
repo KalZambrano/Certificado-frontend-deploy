@@ -32,3 +32,60 @@
         mask-image: linear-gradient(to bottom, black 80%, transparent);
     }
 </style>
+
+<script is:inline type="module">
+  import { config, getApiUrl } from "../../config";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+
+    if (!form){
+      console.error('Formulario no encontrado')
+      return;
+    }
+	
+	  form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Obtener valores del formulario
+      const correo = form.usuario.value;
+      const clave = form.password.value;
+
+      try {
+        const response = await fetch(getApiUrl(config.endpoints.users.login), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+		      credentials: 'include',
+          body: JSON.stringify({
+            correo: correo,
+            clave: clave
+          })
+        });
+
+        const data = await response.json();
+        const role = data.rol
+        const user = data.correo
+         // Muestra la respuesta en la consola
+
+        if (response.ok) {
+          // Por ejemplo: redireccionar o mostrar un mensaje
+          localStorage.setItem('user', user)
+          localStorage.setItem('role', role)
+          alert('Inicio de sesión exitoso');
+          role === 'ADMINISTRADOR' 
+          ? window.location.href = "/admin/dashboard"
+          : window.location.href = "/user/dashboard";
+          
+        } else {
+			    // Manejar errores
+          alert('Error al iniciar sesión:');
+        }
+      } catch (error) {
+        console.error('Error al hacer login:', error);
+        alert('Hubo un problema de conexión con el servidor.');
+      }
+    });
+  });
+</script>

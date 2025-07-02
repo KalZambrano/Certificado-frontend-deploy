@@ -1,14 +1,16 @@
 ---
 import "../styles/dashboard.css";
 import '@fontsource-variable/onest';
+import ClientRouter from "astro/components/ClientRouter.astro";
 const { title = "Cer + Tech" } = Astro.props
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
+  <ClientRouter/>
 </head>
 <body>
   <div class="dashboard-wrapper">
@@ -29,4 +31,17 @@ const { title = "Cer + Tech" } = Astro.props
 		height: 100%;
 	}
 </style>
+<script>
+  const user = localStorage.getItem("user");
+  const role = localStorage.getItem("role");
+  const path = window.location.pathname;
+
+  if (!user || !role) {
+    window.location.href = "/";
+  } else if (role === "ADMINISTRADOR" && !path.startsWith("/admin")) {
+    window.location.href = "/admin/dashboard";
+  } else if (role !== "ADMINISTRADOR" && !path.startsWith("/user")) {
+    window.location.href = "/user/dashboard";
+  }
+</script>
  

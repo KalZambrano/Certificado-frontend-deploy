@@ -1,9 +1,11 @@
 ---
-import "../styles/global.css";
+import { VerificationPage } from "@/components/VerificationPage";
 import '@fontsource-variable/onest';
 const { title = "Cer + Tech" } = Astro.props
+
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
@@ -12,8 +14,8 @@ const { title = "Cer + Tech" } = Astro.props
 		<title>{title}</title>
 	</head>
 	<body>
-		<main>
-			<slot />
+		<main class="bg-blue-200">
+			<VerificationPage client:load/>
 		</main>
 	</body>
 </html>

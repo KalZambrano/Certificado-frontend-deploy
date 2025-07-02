@@ -17,12 +17,12 @@ const icons = {
 };
 
 const menuItems: MenuItem[] = [
-  { name: 'Inicio', href: '/dashboard', icon: 'home' },
-  { name: 'Gestión del Certificado', href: '/certificates', icon: 'building' },
-  { name: 'Usuario', href: '/users', icon: 'users' },
+  { name: 'Inicio', href: '/admin/dashboard', icon: 'home' },
+  { name: 'Gestión del Certificado', href: '/admin/certificates', icon: 'building' },
+  { name: 'Usuario', href: '/admin/users', icon: 'users' },
   { name: 'Estadísticas', href: '#', icon: 'stats' },
-  { name: 'Documentación', href: '/documentation', icon: 'file-text' },
-  { name: 'Configuración', href: '/configuration', icon: 'settings' }
+  { name: 'Documentación', href: '/admin/documentation', icon: 'file-text' },
+  { name: 'Configuración', href: '/admin/configuration', icon: 'settings' }
 ];
 
 export interface Props {
@@ -59,7 +59,7 @@ const { activeSection } = Astro.props;
       <img src="https://i.pravatar.cc/100?img=3" alt="Usuario" />
       <span>Benjamín</span>
     </div>
-    <button class="logout-btn">Cerrar sesión</button>
+    <button class="logout-btn" id="btn-logout">Cerrar sesión</button>
   </div>  
 </aside>
 
@@ -73,3 +73,13 @@ const { activeSection } = Astro.props;
     color: #1a73e8 !important;
   }
 </style>
+
+<script>
+  document.getElementById('btn-logout')?.addEventListener('click', () => {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      localStorage.removeItem('user')
+      localStorage.removeItem('role')
+      window.location.href = '/'
+    }
+  })
+</script>
