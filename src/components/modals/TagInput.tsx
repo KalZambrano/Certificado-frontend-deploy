@@ -1,4 +1,3 @@
-// File: components/TagInput.tsx
 import { useEffect, useRef } from "react";
 
 interface TagInputProps {
