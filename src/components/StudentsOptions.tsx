@@ -25,11 +25,12 @@ export function StudentsOptions(){
     }, [])
     return (
         <>
+        <option value="">----Seleccione un estudiante----</option>
         {users.length > 0 
             ? users.map((user, index) => {
                     return <option key={index} value={user.correo}>{user.nombre} {user.apellido}</option>
                 })
-            : <option>No hau usuarios registrados</option>
+            : <option>No hay usuarios registrados</option>
         }
         </>
     )

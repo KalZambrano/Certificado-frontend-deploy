@@ -5,6 +5,7 @@ import '@/styles/dashboard.css';
 
 import { FetchCertificates } from './FetchCertificates';
 import { StudentsOptions } from './StudentsOptions';
+import { NewCertificateModal } from './modals/NewCertificateModal';
 ---
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/certificates" />
@@ -15,12 +16,7 @@ import { StudentsOptions } from './StudentsOptions';
         <h1 class="dashboard-title">Gestión de Certificados</h1>
         <p class="dashboard-subtitle">Administra los certificados digitales del sistema</p>
       </div>
-      <button 
-        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-        onclick="document.getElementById('newCertModal').classList.remove('hidden')"
-      >
-        + Nuevo Certificado
-      </button>
+      <NewCertificateModal client:load/>
     </div>
 
     <!-- Tabla de certificados -->
@@ -59,77 +55,7 @@ import { StudentsOptions } from './StudentsOptions';
     </section>
 
     <!-- Modal Nuevo Certificado -->
-    <div id="newCertModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-bold text-gray-800">Nuevo Certificado</h3>
-            <button onclick="document.getElementById('newCertModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-500 text-4xl">
-              &times;
-            </button>
-          </div>
-          <form id="newCertForm">
-            <!-- <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre del Certificado</label>
-              <input class="shadow border rounded w-full py-2 px-3" id="nombre" type="text" placeholder="Ej: Certificado SSL Wildcard">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="tipo">Tipo</label>
-              <select class="shadow border rounded w-full py-2 px-3" id="tipo">
-                <option value="SSL/TLS">SSL/TLS</option>
-                <option value="Firma Digital">Firma Digital</option>
-                <option value="Code Signing">Code Signing</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div> -->
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="estudiante">Estudiante</label>
-              
-              <select class="shadow border rounded w-full py-2 px-3" name="estudiante" id="estudiante" required>
-                <StudentsOptions client:load />
-              </select>
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción</label>
-              <textarea class="shadow border rounded w-full py-2 px-3" rows="4" id="description" placeholder="Ej: Certificado otorgado por haber completado con exito todos los modulos" required></textarea>
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">Etiquetas</label>
-              <div class="flex flex-col gap-2">
-                <input
-                    type="text"
-                    name="tags"
-                    id="tags-input"
-                    placeholder="Escribe un tag y presiona 'Enter' o una coma."
-                    class="shadow border rounded w-full py-2 px-3">
-                <div id="tags-list" class="flex gap-2 flex-wrap"></div>
-              </div>
-              <input type="hidden" name="tags" id="tags">
-            </div>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="nota">Nota</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="nota" type="number" 
-                      step="0.1" min="0" max="20" placeholder="Ej: 15.5" required>
-              </div>
-              <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curso">Curso</label>
-                <input class="shadow border rounded w-full py-2 px-3" id="curso" type="text" required>
-              </div>
-            </div>
-            <div class="flex justify-end">
-              <button type="button" onclick="document.getElementById('newCertModal').classList.add('hidden')" 
-                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2">
-                Cancelar
-              </button>
-              <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Guardar
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    
   </main>
 
   <script is:inline>
@@ -143,40 +69,5 @@ import { StudentsOptions } from './StudentsOptions';
     }
   </script>
 
-  <script type="module" is:inline>
-    import { showTags } from '/src/lib/tagsFunctions.js'
-    showTags('tags-list', 'tags-input', 'tags')
-  </script>
   
-  <script type="module" is:inline>
-    import { setupPostForm } from "/src/lib/apiPost.js";
-    import { config } from "../../config";
-
-    setupPostForm({
-      endpoint: config.endpoints.certificates.create,
-      formName: 'newCert',
-      getData: () => {
-        const correo = document.getElementById('estudiante')?.value || '';
-        const descripcion = document.getElementById('description')?.value || '';
-        const curso = document.getElementById('curso')?.value || '';
-        const nota = document.getElementById('nota')?.value || '';
-
-        const hiddenTagsInput = document.getElementById('tags');
-        const rawValue = hiddenTagsInput.value;
-
-        const habilidades = rawValue
-          .split(',')
-          .map(tag => tag.trim().toUpperCase())
-          .filter(tag => tag.length > 0);
-
-        if (!correo || !descripcion || !curso || !nota || habilidades.length === 0) {
-          alert("Faltan campos en el formulario");
-          throw new Error("Formulario incompleto");
-        }
-
-        return { correo, descripcion, curso, nota, habilidades };
-      },
-      eventName: 'certificadoCreado'
-    });
-  </script>
 </DashboardLayout>
