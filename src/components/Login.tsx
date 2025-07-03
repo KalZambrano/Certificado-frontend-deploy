@@ -35,17 +35,15 @@ export default function Login() {
   };
 
   return (
-    <section className="bg-[url('/class_wallpaper.webp')] bg-cover bg-no-repeat bg-center h-screen">
-      <div className="flex flex-col lg:flex-row items-center justify-center px-6 py-8 mx-auto h-screen max-w-7xl">
-        <span className="flex flex-col justify-center items-center mb-6 text-2xl font-semibold text-gray-900">
+    <section 
+      className="bg-gradient-to-r from-green-800 to-green-300  bg-cover bg-no-repeat bg-center h-screen"
+      style={{backgroundImage: 'radial-gradient(rgba(32, 240, 255, 0.781) 10%, rgb(169, 244, 255) 45%, rgb(173, 255, 255)65%)'}}>
+      <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-around px-6 py-8 mx-auto h-screen max-w-7xl">
+        <span className="flex flex-col justify-center items-center mb-6 text-2xl font-extrabold text-gray-800">
           <img
-            src="/ellie.webp"
-            className="hidden lg:block w-1/4"
-            alt="Ellie siendo el GOAT de todos los videojuegos"
-            style={{
-              maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)',
-            }}
+            src="/aucklandCity.png"
+            className="hidden lg:block w-1/2"
+            alt="El mejor equipo con el que puedes callar la boca de miles de aficionados argentinos"
           />
           Gestor de Recursos Educativos
         </span>
@@ -57,10 +55,11 @@ export default function Login() {
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="usuario" className="block mb-2 text-sm font-medium text-gray-100">
-                  Código institucional
+                  Correo institucional
                 </label>
                 <input
-                  type="text"
+                  type="email"
+                  inputMode="email"
                   name="usuario"
                   placeholder="Ingresa tu usuario"
                   required
@@ -73,6 +72,7 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
+                  inputMode="text"
                   name="password"
                   placeholder="••••••••"
                   required

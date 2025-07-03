@@ -80,6 +80,7 @@ export function NewUserModal() {
                   <input
                     id="nombre"
                     ref={nombreRef}
+                    inputMode='text'
                     type="text"
                     placeholder="Nombre"
                     required
@@ -94,6 +95,7 @@ export function NewUserModal() {
                   <input
                     id="apellido"
                     ref={apellidoRef}
+                    inputMode='text'
                     type="text"
                     placeholder="Apellido"
                     required
@@ -108,6 +110,7 @@ export function NewUserModal() {
                   <input
                     id="correo"
                     ref={correoRef}
+                    inputMode='email'
                     type="email"
                     placeholder="Correo"
                     required
@@ -122,6 +125,7 @@ export function NewUserModal() {
                   <input
                     id="clave"
                     ref={claveRef}
+                    inputMode='text'
                     type="password"
                     placeholder="Contraseña"
                     required

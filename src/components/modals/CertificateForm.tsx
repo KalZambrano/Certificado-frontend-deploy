@@ -110,6 +110,7 @@ export function CertificateForm({ onClose }: CertificateFormProps) {
           <input
             className="shadow border rounded w-full py-2 px-3"
             id="nota"
+            inputMode="decimal"
             type="number"
             step="0.1"
             min="0"
@@ -128,10 +129,12 @@ export function CertificateForm({ onClose }: CertificateFormProps) {
           <input
             className="shadow border rounded w-full py-2 px-3"
             id="curso"
+            inputMode="text"
             type="text"
             name="curso"
             value={formData.curso}
             onChange={handleChange}
+            placeholder="El: Desarrollo Web Integrado"
             required
           />
         </div>
