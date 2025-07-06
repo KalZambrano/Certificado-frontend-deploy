@@ -2,9 +2,10 @@ import { useEffect, useRef } from "react";
 
 interface TagInputProps {
   hiddenInputRef: React.RefObject<HTMLInputElement | null>;
+  initialTags?: string[];
 }
 
-export function TagInput({ hiddenInputRef }: TagInputProps) {
+export function TagInput({ hiddenInputRef, initialTags = [] }: TagInputProps) {
   const tagsInputRef = useRef<HTMLInputElement | null>(null);
   const tagsListRef = useRef<HTMLDivElement | null>(null);
 
@@ -15,31 +16,6 @@ export function TagInput({ hiddenInputRef }: TagInputProps) {
 
     if (!tagsInput || !tagsList || !hiddenInput) return;
 
-    const handleAddTag = (e: KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === ",") {
-        e.preventDefault();
-        const tagText = tagsInput.value.trim().replace(",", "");
-        if (tagText) {
-          const tagDiv = document.createElement("div");
-          tagDiv.className =
-            "flex justify-center items-center bg-gray-300 capitalize rounded-full px-2 py-1 gap-2 tag";
-          tagDiv.innerHTML = `
-            ${tagText}
-            <span class="tag-remove cursor-pointer font-bold">×</span>
-          `;
-          tagsList.appendChild(tagDiv);
-
-          tagDiv.querySelector(".tag-remove")?.addEventListener("click", () => {
-            tagDiv.remove();
-            updateHiddenInput();
-          });
-
-          tagsInput.value = "";
-          updateHiddenInput();
-        }
-      }
-    };
-
     const updateHiddenInput = () => {
       const tagElements = tagsList.querySelectorAll(".tag");
       const tags = Array.from(tagElements)
@@ -48,12 +24,44 @@ export function TagInput({ hiddenInputRef }: TagInputProps) {
       hiddenInput.value = tags.join(",");
     };
 
+    const createTagElement = (tagText: string) => {
+      const tagDiv = document.createElement("div");
+      tagDiv.className =
+        "flex justify-center items-center bg-gray-300 capitalize rounded-full px-2 py-1 gap-2 tag";
+      tagDiv.innerHTML = `
+        ${tagText}
+        <span class="tag-remove cursor-pointer font-bold">×</span>
+      `;
+      tagDiv.querySelector(".tag-remove")?.addEventListener("click", () => {
+        tagDiv.remove();
+        updateHiddenInput();
+      });
+      tagsList.appendChild(tagDiv);
+    };
+
+    // Render tags si es edición
+    tagsList.innerHTML = "";
+    initialTags.forEach((tag) => createTagElement(tag));
+    updateHiddenInput();
+
+    const handleAddTag = (e: KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === ",") {
+        e.preventDefault();
+        const tagText = tagsInput.value.trim().replace(",", "");
+        if (tagText) {
+          createTagElement(tagText);
+          tagsInput.value = "";
+          updateHiddenInput();
+        }
+      }
+    };
+
     tagsInput.addEventListener("keydown", handleAddTag);
 
     return () => {
       tagsInput.removeEventListener("keydown", handleAddTag);
     };
-  }, [hiddenInputRef]);
+  }, [hiddenInputRef, initialTags]);
 
   return (
     <div className="flex flex-col gap-2">

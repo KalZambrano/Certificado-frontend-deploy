@@ -50,7 +50,7 @@ export interface CertificateUniqueAPI {
     estudiante:         Estudiante;
 }
 
-type Estudiante = {
+export type Estudiante = {
     id:       number;
     nombre:   string;
     apellido: string;
