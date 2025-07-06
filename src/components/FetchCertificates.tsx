@@ -2,7 +2,7 @@ import { SkeletonRow } from "./skeletons/SkeletonRow";
 import { useState, useEffect } from "react";
 import { config, getApiUrl } from "../../config";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { editar, eliminar } from "../lib/actionFunctions";
+import { eliminar } from "../lib/actionFunctions";
 import { type CertificateUniqueAPI } from "types";
 import { EditCertificateForm } from "./modals/EditCertificateForm";
 
@@ -50,9 +50,7 @@ export function FetchCertificates() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Curso</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Usuario Registrado</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Emisión</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vencimiento</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nota</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
 
               </tr>
@@ -72,9 +70,7 @@ export function FetchCertificates() {
                             <td className="px-6 py-4 text-sm font-medium text-gray-900">{cert.curso}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{cert.estudiante.apellido}, {cert.estudiante.nombre}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{new Date(cert.fechaEmision).toLocaleDateString()}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">Vencera Algun dia</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{cert.nota}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">Espacio para estados</td>
                             {/* <td className="px-6 py-4">
                                 <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                 ${cert.estado === 'Vigente' 

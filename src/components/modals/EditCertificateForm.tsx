@@ -1,4 +1,3 @@
-import { editar } from "@/lib/actionFunctions";
 import { useState } from "react";
 import { CertificateForm } from "./CertificateForm";
 import { BiSolidPencil } from "react-icons/bi";
