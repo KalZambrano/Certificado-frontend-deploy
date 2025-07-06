@@ -2,9 +2,9 @@ import { SkeletonRow } from "./skeletons/SkeletonRow";
 import { useState, useEffect } from "react";
 import { config, getApiUrl } from "../../config";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { BiSolidPencil } from "react-icons/bi";
 import { editar, eliminar } from "../lib/actionFunctions";
 import { type CertificateUniqueAPI } from "types";
+import { EditCertificateForm } from "./modals/EditCertificateForm";
 
 export function FetchCertificates() {
 
@@ -86,9 +86,7 @@ export function FetchCertificates() {
                                 </span>
                             </td> */}
                             <td className="px-6 py-4 text-sm font-medium flex gap-x-2">
-                                <button onClick={() => editar(`${cert.curso}`)} className="bg-blue-700 rounded-md p-1 cursor-pointer">
-                                    <BiSolidPencil className="text-white size-6 rounded-md"/>
-                                </button>
+                                <EditCertificateForm certificateId={cert.id}/>
                                 <button 
                                 onClick={() => eliminar(`${cert.curso}`,getApiUrl(config.endpoints.certificates.delete(cert.id)), fetchCertificates)}
                                 className="cursor-pointer">

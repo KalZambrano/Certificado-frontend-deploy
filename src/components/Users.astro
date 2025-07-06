@@ -2,8 +2,7 @@
 import DashboardLayout from '../layouts/DashboardLayout.astro';
 import CardStat from '../components/CardStat.astro';
 import Sidebar from "../components/Sidebar.astro";
-import DeleteIcon from "../assets/trash.svg"
-import EditIcon from "../assets/pencil.svg"
+import { NewUserModal } from './modals/NewUserModal';
 import '../styles/dashboard.css';
 import { FetchUsers } from './FetchUsers';
 
@@ -17,16 +16,13 @@ const userStats = [
 
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/users" />
-  
   <main class="dashboard-main">
     <div class="flex justify-between items-center mb-6">
       <div>
         <h1 class="dashboard-title">Gestión de Usuarios</h1>
         <p class="dashboard-subtitle">Administra los usuarios del sistema y sus permisos</p>
       </div>
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-        + Nuevo Usuario
-      </button>
+      <NewUserModal client:load/>
     </div>
 
     <!-- Estadísticas de usuarios -->
@@ -83,102 +79,5 @@ const userStats = [
       </div>
     </section>
 
-    <!-- Modal de nuevo usuario -->
-    <div id="newUserModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-bold text-gray-800">Nuevo Usuario</h3>
-            <button onclick="document.getElementById('newUserModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-500">
-              &times;
-            </button>
-          </div>
-          <form id="newUserForm">
-            <div class="mb-4">
-              <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-              <input id="nombre" type="text" placeholder="Nombre" required
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            </div>
-
-            <div class="mb-4">
-              <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
-              <input id="apellido" type="text" placeholder="Apellido" required
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            </div>
-
-            <div class="mb-4">
-              <label for="correo" class="block text-gray-700 text-sm font-bold mb-2">Correo electrónico</label>
-              <input id="correo" type="email" placeholder="Correo" required
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            </div>
-
-            <div class="mb-4">
-              <label for="clave" class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
-              <input id="clave" type="password" placeholder="Contraseña" required
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            </div>
-
-            <div class="mb-4">
-              <label for="rol" class="block text-gray-700 text-sm font-bold mb-2">Rol</label>
-              <select id="rol" required
-                class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <option value="USER">Usuario</option>
-                <option value="ADMINISTRADOR">Administrador</option>
-              </select>
-            </div>
-
-            <div class="flex justify-end">
-              <button type="button" onclick="document.getElementById('newUserModal').classList.add('hidden')"
-                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2">
-                Cancelar
-              </button>
-              <button type="submit"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Guardar
-              </button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-    </div>
   </main>
-
-  <script is:inline>
-    // Mostrar modal "Nuevo Usuario"
-    document.addEventListener('DOMContentLoaded', function() {
-      const newUserBtn = document.querySelector('main button.bg-blue-600');
-      if (newUserBtn) {
-        newUserBtn.addEventListener('click', function() {
-          document.getElementById('newUserModal').classList.remove('hidden');
-        });
-      }
-    });
-  </script>
-
-  <script type="module" is:inline>  
-  import { setupPostForm } from "/src/lib/apiPost.js";
-  import { config } from '../../config';
-
-    setupPostForm({
-      endpoint: config.endpoints.users.register,
-      formName: 'newUser',
-      getData: () => {
-        const nombre = document.getElementById('nombre')?.value || '';
-        const apellido = document.getElementById('apellido')?.value || '';
-        const correo = document.getElementById('correo')?.value || '';
-        const clave = document.getElementById('clave')?.value || '';
-        const rol = document.getElementById('rol')?.value || '';
-
-        if (!nombre || !apellido || !correo || !clave || !rol) {
-          alert("Faltan campos en el formulario");
-          throw new Error("Formulario incompleto");
-        }
-
-        return { nombre, apellido, correo, clave, rol };
-      },
-      eventName: 'userCreated'
-    });
-</script>
-
 </DashboardLayout>
