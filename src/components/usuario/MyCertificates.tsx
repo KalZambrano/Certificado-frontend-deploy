@@ -72,8 +72,7 @@ export function MyCertificates (){
                                         <line x1="12" y1="15" x2="12" y2="3"></line>
                                         </svg>
                                     </button>
-                                    {/* <a href={`/verification/certificado/?link=${cert.nota}`}>Revisar</a> */}
-                                    <a href="/verification/certificado/?link=cb8e0fda-6372-4429-a849-4b59a15f2d37">Revisar</a>
+                                    <a target="_blank" href={`/verification/certificado/?link=${cert.codigoVerificacion}`}>Revisar</a>
                                 </div>
                             </td>
                             

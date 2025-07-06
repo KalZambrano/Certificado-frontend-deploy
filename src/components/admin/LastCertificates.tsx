@@ -98,7 +98,7 @@ export function LastCertificates() {
                 </button>
                 <a
                   target="_blank"
-                  href="/verification/certificado/?link=7265c51a-9ddb-49a6-a168-ee7576faa8ce"
+                  href={`/verification/certificado/?link=${certificates[certificates.length - 4 + index]?.codigoVerificacion}`}
                 >
                   Revisar
                 </a>

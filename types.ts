@@ -36,6 +36,7 @@ export interface StudentCertificatesAPI {
     descripcion:    string;
     habilidades:    string[];
     fechaEmision:   Date;
+    codigoVerificacion: string;
 }
 
 // Para cuando se consigue un unico certificado - Pagina dinamica
