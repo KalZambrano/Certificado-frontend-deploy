@@ -73,7 +73,7 @@ export function LastCertificates() {
                 {new Date(certificates[certificates.length - 4 + index]?.fechaEmision).toLocaleDateString()}
               </td>
               <td className="px-12 py-8 flex gap-x-2">
-                <DownloadButton/>
+                <DownloadButton pretty={false}/>
                 <a
                   className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
                   target="_blank"

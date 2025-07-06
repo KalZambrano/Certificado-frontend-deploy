@@ -1,8 +1,11 @@
-export function DownloadButton() {
+import { MdOutlineFileDownload } from "react-icons/md";
+import { getApiUrl, config } from "config";
+
+export function DownloadButton({ pretty }: { pretty: boolean }) {
   const descargarPDF = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/certificados/3/pdf",
+        "http://localhost:8080/api/certificados/3/pdf", // "getApiUrl(config.endpoints.certificates.download(id))"
         {
           method: "GET",
           headers: {
@@ -28,5 +31,20 @@ export function DownloadButton() {
       console.error("Error al descargar el PDF:", error);
     }
   };
-  return <button onClick={descargarPDF}>Descargar PDF</button>;
+  return pretty ? (
+    <button
+      onClick={descargarPDF}
+      className="cursor-pointer group/download relative flex gap-1 px-8 py-4 bg-[#5c5fe9] text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 font-semibold shadow-xl active:shadow-inner transition-all duration-300"
+    >
+      <MdOutlineFileDownload className="size-6" />
+      Descargar
+    </button>
+  ) : (
+    <button
+      className="flex items-center py-1 px-2 hover:bg-gray-200 rounded-md"
+      onClick={descargarPDF}
+    >
+      <MdOutlineFileDownload className="size-4" />
+    </button>
+  );
 }

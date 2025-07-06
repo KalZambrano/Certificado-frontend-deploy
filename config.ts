@@ -18,6 +18,7 @@ export const config = {
             detail: (id: number | string) => `/certificados/${id}`,
             delete: (id: number | string) => `/certificados/${id}`,
             update: (id: number | string) => `/certificados/${id}`,
+            download: (id: number | string) => `/certificados/${id}/pdf`
         }
     }
 }

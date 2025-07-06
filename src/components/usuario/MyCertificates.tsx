@@ -68,7 +68,7 @@ export function MyCertificates() {
               </td>
               <td className="my-auto">
                 <div className="flex gap-x-2">
-                  <DownloadButton/>
+                  <DownloadButton pretty={false}/>
                   <a
                     className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
                     target="_blank"
