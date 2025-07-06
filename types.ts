@@ -1,7 +1,7 @@
 // Type para la api de conseguir todos los certificados
 export interface CertificatesAPI {
     id:                 number;
-    nombreEstudiante:   string;
+    nombreCompleto:   string;
     curso:              string;
     nota:               number;
     fechaEmision:       Date;
