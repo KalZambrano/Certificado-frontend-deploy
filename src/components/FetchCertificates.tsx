@@ -59,10 +59,10 @@ export function FetchCertificates() {
             {
                 loading ? (
                     <>
-                        <SkeletonRow rowCount={4}/>
-                        <SkeletonRow rowCount={4}/>
-                        <SkeletonRow rowCount={4}/>
-                        <SkeletonRow rowCount={4}/>
+                        <SkeletonRow rowCount={2}/>
+                        <SkeletonRow rowCount={2}/>
+                        <SkeletonRow rowCount={2}/>
+                        <SkeletonRow rowCount={2}/>
                     </>
                 ):(
                     data.map((cert, index) => (
