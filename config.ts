@@ -24,6 +24,6 @@ export const config = {
 
 export const getApiUrl = (endpoint: string) => {
   const url = `${config.apiUrl}${endpoint}`;
-  console.log(`[${config.apiUrl}] Requesting:`, url);
+  // console.log(`[${config.apiUrl}] Requesting:`, url);
   return url;
 };
