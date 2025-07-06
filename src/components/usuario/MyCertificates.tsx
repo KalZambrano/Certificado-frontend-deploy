@@ -39,7 +39,6 @@ export function MyCertificates (){
                 <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Curso</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha de Emisión</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
 
                 </tr>
@@ -58,7 +57,6 @@ export function MyCertificates (){
                         <tr key={index} className="hover:bg-gray-50">
                             <td className="px-6 py-4 text-sm font-medium text-gray-900">{cert.curso}</td>
                             <td className="px-6 py-4 text-sm text-gray-500">{new Date(cert.fechaEmision).toLocaleDateString()}</td>
-                            <td className="px-6 py-4 text-sm text-gray-500">Espacio para estado</td>
                             <td className="my-auto">
                                 <div className="flex gap-x-2">
                                     <button className="action-btn">
