@@ -1,5 +1,6 @@
 export const config = {
-    apiUrl: 'http://localhost:8080/api',
+    // apiUrl: 'http://localhost:8080/api',
+    apiUrl: import.meta.env.PUBLIC_API_URL,
 
     endpoints: {
         users: {
