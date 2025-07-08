@@ -56,35 +56,45 @@ export function LastCertificates() {
             <SkeletonRow />
           </>
         ) : (
-          Array.from({length: 4}).map((_, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm text-gray-500">
-                <div className="user-info">
-                  <span className="avatar">
-                    {certificates[certificates.length - 4 + index]?.estudiante.nombre.charAt(0)}
-                  </span>
-                  {certificates[certificates.length - 4 + index]?.estudiante.nombre} {certificates[certificates.length - 4 + index]?.estudiante.apellido}
-                </div>
-              </td>
-              <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                {certificates[certificates.length - 4 + index]?.curso}
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">
-                {new Date(certificates[certificates.length - 4 + index]?.fechaEmision).toLocaleDateString()}
-              </td>
-              <td className="px-12 py-8 flex gap-x-2">
-                <DownloadButton pretty={false}/>
-                <a
-                  className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
-                  target="_blank"
-                  href={`/verification/certificado/?link=${certificates[certificates.length - 4 + index]?.codigoVerificacion}`}
-                >
-                  <FaRegEye className="size-4"/>
-                  Revisar
-                </a>
-              </td>
-            </tr>
-          ))
+          Array.from({ length: 4 }).map((_, index) => {
+            const cert = certificates[certificates.length - 4 + index] ?? {};
+            const estudiante = cert.estudiante ?? {};
+            const nombre = estudiante.nombre ?? "Nombre";
+            const apellido = estudiante.apellido ?? "Apellido";
+            const curso = cert.curso ?? "Curso desconocido";
+            const fechaEmision = cert.fechaEmision
+              ? new Date(cert.fechaEmision).toLocaleDateString()
+              : "Fecha no disponible";
+            const codigoVerificacion = cert.codigoVerificacion ?? "";
+
+            return (
+              <tr key={index} className="hover:bg-gray-50">
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  <div className="user-info text-center">
+                    <span className="avatar">{nombre.charAt(0)}</span>
+                    {nombre} {apellido}
+                  </div>
+                </td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                  {curso}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  {fechaEmision}
+                </td>
+                <td className="px-12 py-8 flex gap-x-2">
+                  <DownloadButton pretty={false} />
+                  <a
+                    className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
+                    target="_blank"
+                    href={`/verification/certificado/?link=${codigoVerificacion}`}
+                  >
+                    <FaRegEye className="size-4" />
+                    Revisar
+                  </a>
+                </td>
+              </tr>
+            );
+          })
         )}
       </tbody>
     </table>

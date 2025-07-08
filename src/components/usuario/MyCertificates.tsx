@@ -57,22 +57,32 @@ export function MyCertificates() {
             <SkeletonRow rowCount={2} />
             <SkeletonRow rowCount={2} />
           </>
+        ) : certificates.length === 0 ? (
+          <tr>
+            <td colSpan={3} className="text-center py-6 text-gray-500">
+              No hay certificados disponibles.
+            </td>
+          </tr>
         ) : (
           certificates.map((cert, index) => (
             <tr key={index} className="hover:bg-gray-50">
               <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                {cert.curso}
+                {cert.curso ?? "Curso desconocido"}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500">
-                {new Date(cert.fechaEmision).toLocaleDateString()}
+                {cert.fechaEmision
+                  ? new Date(cert.fechaEmision).toLocaleDateString()
+                  : "Fecha no disponible"}
               </td>
               <td className="my-auto">
                 <div className="flex gap-x-2">
-                  <DownloadButton pretty={false}/>
+                  <DownloadButton pretty={false} />
                   <a
                     className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
                     target="_blank"
-                    href={`/verification/certificado/?link=${cert.codigoVerificacion}`}
+                    href={`/verification/certificado/?link=${
+                      cert.codigoVerificacion ?? ""
+                    }`}
                   >
                     <FaRegEye className="size-4" />
                     Revisar
