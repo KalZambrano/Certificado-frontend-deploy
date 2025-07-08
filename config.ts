@@ -10,6 +10,7 @@ export const config = {
             register: '/auth/register',
             login: '/auth/login',
             detail: (id: number | string) => `/auth/${id}`,
+            detailByEmail: (email: string) => `/auth/buscar?correo=${email}`,
             certificates: (email: string) => `/certificados/estudiante?correo=${email}`
         },
         certificates: {
