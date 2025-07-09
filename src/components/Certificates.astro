@@ -4,14 +4,13 @@ import Sidebar from "@/components/Sidebar.astro";
 import '@/styles/dashboard.css';
 
 import { FetchCertificates } from './FetchCertificates';
-import { StudentsOptions } from './StudentsOptions';
 import { NewCertificateModal } from './modals/NewCertificateModal';
 ---
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/certificates" />
 
   <main class="dashboard-main">
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6">
       <div>
         <h1 class="dashboard-title">Gestión de Certificados</h1>
         <p class="dashboard-subtitle">Administra los certificados digitales del sistema</p>
@@ -20,29 +19,15 @@ import { NewCertificateModal } from './modals/NewCertificateModal';
     </div>
 
     <!-- Tabla de certificados -->
-    <section class="certificates-section mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="section-title">Listado de Certificados</h2>
-        <div class="relative">
-          <input 
-            id="buscador"
-            type="text" 
-            placeholder="Buscar certificado..." 
-            onkeyup="filtrarCertificados()"
-            class="pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-          <span class="absolute left-2 top-3">🔍</span>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-lg shadow overflow-hidden">
+    <section class=" mt-8">
+      <div class="bg-white rounded-lg shadow overflow-hidden certificates-section">
         <div class="overflow-x-auto">
           <FetchCertificates client:load />
         </div>
       </div>
 
       <!-- Paginación -->
-      <div class="flex justify-between items-center mt-4">
+      <!-- <div class="flex justify-between items-center mt-4">
         <div class="text-sm text-gray-500">
           Mostrando 1 al 5 de 5 certificados
         </div>
@@ -51,7 +36,7 @@ import { NewCertificateModal } from './modals/NewCertificateModal';
           <button class="px-3 py-1 border rounded-md text-white bg-blue-600 hover:bg-blue-700">1</button>
           <button class="px-3 py-1 border rounded-md text-gray-700 bg-white hover:bg-gray-50">Siguiente</button>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <!-- Modal Nuevo Certificado -->
