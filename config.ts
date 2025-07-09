@@ -1,5 +1,6 @@
 export const config = {
-    apiUrl: 'http://localhost:8080/api',
+    // apiUrl: 'http://localhost:8080/api',
+    apiUrl: import.meta.env.PUBLIC_API_URL,
 
     endpoints: {
         users: {
@@ -9,6 +10,7 @@ export const config = {
             register: '/auth/register',
             login: '/auth/login',
             detail: (id: number | string) => `/auth/${id}`,
+            detailByEmail: (email: string) => `/auth/buscar?correo=${email}`,
             certificates: (email: string) => `/certificados/estudiante?correo=${email}`
         },
         certificates: {
@@ -18,6 +20,7 @@ export const config = {
             detail: (id: number | string) => `/certificados/${id}`,
             delete: (id: number | string) => `/certificados/${id}`,
             update: (id: number | string) => `/certificados/${id}`,
+            download: (id: number | string) => `/certificados/${id}/pdf`
         }
     }
 }

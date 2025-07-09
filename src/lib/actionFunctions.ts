@@ -21,7 +21,3 @@ export async function eliminar(nombre: string, endpoint: string, onSuccess?: () 
         }
     }
 }
-
-export function editar(nombre: string) {
-    alert("Función de editar aún no implementada para: " + nombre);
-}

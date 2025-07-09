@@ -1,24 +1,17 @@
 ---
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
 import CardStat from '@/components/CardStat.astro';
-import Table from '@/components/Table.astro';
 import Sidebar from "@/components/Sidebar.astro";
 import CourseCard from '@/components/CourseCard.astro';
+import { LastCertificates } from '@/components/admin/LastCertificates'
 import '@/styles/dashboard.css';
+
 
 const stats = [
   { title: 'Certificados Emitidos', value: '78%', subtitle: 'Del total de usuarios', icon: '📜' },
-  { title: 'Certificados Válidos', value: '3500', subtitle: 'Verificados y activos', icon: '✅' },
+  { title: 'Certificados Válidos', value: '350', subtitle: 'Verificados y activos', icon: '✅' },
   { title: 'Pendientes de revisión', value: '24', subtitle: 'En proceso de validación', icon: '⏳' },
   { title: 'Certificados anulados', value: '7', subtitle: 'Por incidencias', icon: '❌' }
-];
-
-const tableColumns = ['Alumno', 'Curso', 'Fecha de Emisión', 'Estado', 'Acciones'];
-const tableData = [
-  { id: 'cert-001', nombre: 'María González', curso: 'Marketing Digital Avanzado', fecha: '15/06/2024', estado: 'Aprobado'},
-  { id: 'cert-002', nombre: 'Carlos Mendoza', curso: 'Programación Full Stack', fecha: '14/06/2024', estado: 'Pendiente' },
-  { id: 'cert-003', nombre: 'Ana Torres', curso: 'Diseño UX/UI', fecha: '13/06/2024', estado: 'Aprobado'},
-  { id: 'cert-004', nombre: 'Jorge Silva', curso: 'Data Science', fecha: '12/06/2024', estado: 'Rechazado'},
 ];
 
 const recommendedCourses = [
@@ -74,21 +67,8 @@ const recommendedCourses = [
     <section class="certificates-section">
       <h2 class="section-title">Registro de Certificados</h2>
       <p class="section-subtitle">Últimos certificados generados en el sistema</p>
-      <Table columns={tableColumns} data={tableData} />
-      <div class="certificates-legend">
-        <div class="legend-item">
-          <span class="legend-color aprobado"></span>
-          <span class="legend-label">Certificados Aprobados</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color pendiente"></span>
-          <span class="legend-label">Certificados Pendientes</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color rechazado"></span>
-          <span class="legend-label">Certificados Rechazados</span>
-        </div>
-      </div>
+      <LastCertificates client:visible/>
+      
     </section>
   </main>
 </DashboardLayout>
