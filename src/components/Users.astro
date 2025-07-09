@@ -38,27 +38,16 @@ const userStats = [
     </section>
 
     <!-- Tabla de usuarios -->
-    <section class="certificates-section mt-8">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="section-title">Listado de Usuarios</h2>
-        <div class="relative">
-          <input 
-            type="text" 
-            placeholder="Buscar usuario..." 
-            class="pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-          <span class="absolute left-2 top-3">🔍</span>
-        </div>
-      </div>
+    <section class="mt-8">
       
-      <div class="bg-white rounded-lg shadow overflow-hidden">
+      <div class="bg-white rounded-lg shadow overflow-hidden certificates-section">
         <div class="overflow-x-auto">
           <FetchUsers client:visible />
         </div>
       </div>
       
       <!-- Paginación -->
-      <div class="flex justify-between items-center mt-4">
+      <!-- <div class="flex justify-between items-center mt-4">
         <div class="text-sm text-gray-500">
           Mostrando 1 al 10 de 142 usuarios
         </div>
@@ -76,7 +65,7 @@ const userStats = [
             Siguiente
           </button>
         </div>
-      </div>
+      </div> -->
     </section>
 
   </main>
