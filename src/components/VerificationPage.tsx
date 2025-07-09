@@ -4,8 +4,8 @@ import { type CertificatesAPI } from "../../types";
 import "@/styles/dashboard.css";
 
 import { LoadingPage } from "./LoadingPage";
+import { DownloadButton } from "./DowloadButton";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineFileDownload } from "react-icons/md";
 import { AiOutlineSignature } from "react-icons/ai";
 import { FiLayers } from "react-icons/fi";
 import { LuClipboardCheck } from "react-icons/lu";
@@ -108,10 +108,7 @@ export function VerificationPage() {
             </div>
           </div>
           <div>
-            <button className="cursor-pointer group/download relative flex gap-1 px-8 py-4 bg-[#5c5fe9] text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 font-semibold shadow-xl active:shadow-inner transition-all duration-300">
-              <MdOutlineFileDownload className="size-6" />
-              Descargar
-            </button>
+            <DownloadButton pretty={true} certificateId={certificate.id}/>
           </div>
         </div>
       </section>

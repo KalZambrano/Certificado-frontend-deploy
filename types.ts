@@ -30,12 +30,14 @@ export interface OnlyUsersAPI {
 
 // Type para los certificados del estudiante (encontrados por email)
 export interface StudentCertificatesAPI {
-    nombreCompleto: string;
-    curso:          string;
-    nota:           number;
-    descripcion:    string;
-    habilidades:    string[];
-    fechaEmision:   Date;
+    id:                 number;
+    nombreCompleto:     string;
+    curso:              string;
+    nota:               number;
+    descripcion:        string;
+    habilidades:        string[];
+    fechaEmision:       Date;
+    codigoVerificacion: string;
 }
 
 // Para cuando se consigue un unico certificado - Pagina dinamica
