@@ -108,7 +108,7 @@ export function VerificationPage() {
             </div>
           </div>
           <div>
-            <DownloadButton pretty={true}/>
+            <DownloadButton pretty={true} certificateId={certificate.id}/>
           </div>
         </div>
       </section>

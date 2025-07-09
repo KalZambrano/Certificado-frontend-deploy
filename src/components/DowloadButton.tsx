@@ -1,11 +1,11 @@
 import { MdOutlineFileDownload } from "react-icons/md";
 import { getApiUrl, config } from "config";
 
-export function DownloadButton({ pretty }: { pretty: boolean }) {
+export function DownloadButton({ pretty, certificateId }: { pretty: boolean, certificateId: number }) {
   const descargarPDF = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/certificados/3/pdf", // "getApiUrl(config.endpoints.certificates.download(id))"
+        getApiUrl(config.endpoints.certificates.download(certificateId)),
         {
           method: "GET",
           headers: {

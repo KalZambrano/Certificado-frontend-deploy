@@ -19,7 +19,7 @@ export function FetchUsers() {
         return response.json();
       })
       .then((users) => {
-        console.log(users);
+        // console.log(users);
         setData(users);
         setLoading(false);
       })

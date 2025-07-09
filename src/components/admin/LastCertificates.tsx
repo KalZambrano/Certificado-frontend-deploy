@@ -82,7 +82,7 @@ export function LastCertificates() {
                   {fechaEmision}
                 </td>
                 <td className="px-12 py-8 flex gap-x-2">
-                  <DownloadButton pretty={false} />
+                  <DownloadButton pretty={false} certificateId={cert.id}/>
                   <a
                     className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
                     target="_blank"
