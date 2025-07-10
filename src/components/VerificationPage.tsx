@@ -145,18 +145,18 @@ export function VerificationPage() {
           )}
           <h3 className="font-bold">Criterio de Optención</h3>
           <p className="flex gap-1 items-center my-6">
-            <LuClipboardCheck className="text-green-700 size-4" />
+            <LuClipboardCheck className="text-green-700 size-8 md:size-4" />
             Puntuación de aprobación (70 %) en el examen integral de la academia
-            responsable
+            responsable.
           </p>
           <p className="font-semibold text-blue-600">
             Puntuación Obtenida {nota}
           </p>
         </div>
       </section>
-      <footer className="flex flex-col items-center">
+      <footer className="flex flex-col items-center px-3">
         <hr className="h-[2px] w-full min-w-[18rem] bg-transparent bg-gradient-to-r from-transparent via-black to-transparent bg-center"></hr>
-        <p className="py-5">In every line of code there is a developer who didn't know what to do, but you are not the same as yesterday.</p>
+        <p className="py-5 italic text-center text-balance">Every line of code once came from doubt. But you're not the same dev you were yesterday, you've debugged, committed, and leveled up. Keep building.</p>
       </footer>
     </>
   );

@@ -17,7 +17,7 @@ const userStats = [
 <DashboardLayout>
   <Sidebar slot="sidebar" activeSection="/users" />
   <main class="dashboard-main">
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6">
       <div>
         <h1 class="dashboard-title">Gestión de Usuarios</h1>
         <p class="dashboard-subtitle">Administra los usuarios del sistema y sus permisos</p>
@@ -26,7 +26,7 @@ const userStats = [
     </div>
 
     <!-- Estadísticas de usuarios -->
-    <section class="stats-grid">
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
       {userStats.map(stat => (
         <CardStat 
           title={stat.title} 

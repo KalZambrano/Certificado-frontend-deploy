@@ -81,15 +81,14 @@ export function LastCertificates() {
                 <td className="px-6 py-4 text-sm text-gray-500">
                   {fechaEmision}
                 </td>
-                <td className="px-12 py-8 flex gap-x-2">
+                <td className="px-12 py-8 flex gap-x-1">
                   <DownloadButton pretty={false} certificateId={cert.id}/>
                   <a
-                    className="flex gap-x-1 items-center py-1 px-2 hover:bg-gray-200 rounded-md"
+                    className="flex gap-x-1 items-center p-2 hover:bg-gray-200 rounded-md"
                     target="_blank"
                     href={`/verification/certificado/?link=${codigoVerificacion}`}
                   >
                     <FaRegEye className="size-4" />
-                    Revisar
                   </a>
                 </td>
               </tr>
